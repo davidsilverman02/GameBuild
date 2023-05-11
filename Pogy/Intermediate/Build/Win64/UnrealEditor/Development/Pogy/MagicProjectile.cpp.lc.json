@@ -1,0 +1,15 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\pogy\\source\\pogy\\magicprojectile.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\pogy\\intermediate\\build\\win64\\pogyeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\pogy\\intermediate\\build\\win64\\unrealeditor\\development\\pogy\\definitions.pogy.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\pogy\\source\\pogy\\magicprojectile.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\pogy\\intermediate\\build\\win64\\unrealeditor\\inc\\pogy\\magicprojectile.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

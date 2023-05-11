@@ -1,0 +1,14 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\pogy\\source\\pogy\\pogy.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\pogy\\intermediate\\build\\win64\\pogyeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\pogy\\intermediate\\build\\win64\\unrealeditor\\development\\pogy\\definitions.pogy.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\pogy\\source\\pogy\\pogy.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

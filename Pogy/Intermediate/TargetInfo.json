@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "Pogy",
+			"Path": "C:\\Users\\david.silverman\\source\\repos\\GameBuild\\Pogy\\Source\\Pogy.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "PogyEditor",
+			"Path": "C:\\Users\\david.silverman\\source\\repos\\GameBuild\\Pogy\\Source\\PogyEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
