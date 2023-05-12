@@ -34,10 +34,12 @@
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN
 "C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\PogyEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
-"C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\UnrealEditor\Development\Pogy\MagicProjectile.cpp.obj"
+"C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\UnrealEditor\Development\Pogy\Explosives.cpp.obj"
 "C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\UnrealEditor\Development\Pogy\Pogy.cpp.obj"
 "C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\UnrealEditor\Development\Pogy\PogyGameModeBase.cpp.obj"
+"C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\UnrealEditor\Development\Pogy\MagicProjectile.cpp.obj"
 "C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\UnrealEditor\Development\Pogy\ThisCharacter.cpp.obj"
+"C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\UnrealEditor\Development\Pogy\Explosives.gen.cpp.obj"
 "C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\UnrealEditor\Development\Pogy\MagicProjectile.gen.cpp.obj"
 "C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\UnrealEditor\Development\Pogy\Pogy.init.gen.cpp.obj"
 "C:\Users\david.silverman\source\repos\GameBuild\Pogy\Intermediate\Build\Win64\UnrealEditor\Development\Pogy\PogyGameModeBase.gen.cpp.obj"

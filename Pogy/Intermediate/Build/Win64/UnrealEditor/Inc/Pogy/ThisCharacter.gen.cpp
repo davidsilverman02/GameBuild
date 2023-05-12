@@ -46,6 +46,14 @@ void EmptyLinkFunctionForGeneratedCodeThisCharacter() {}
 #endif
 		static const UECodeGen_Private::FClassPropertyParams NewProp_Projectile;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Hole_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_Hole;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Teleport_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_Teleport;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Spring_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_Spring;
@@ -92,6 +100,20 @@ void EmptyLinkFunctionForGeneratedCodeThisCharacter() {}
 #endif
 	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AThisCharacter_Statics::NewProp_Projectile = { "Projectile", nullptr, (EPropertyFlags)0x0024080000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AThisCharacter, Projectile), Z_Construct_UClass_AActor_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_AThisCharacter_Statics::NewProp_Projectile_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AThisCharacter_Statics::NewProp_Projectile_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AThisCharacter_Statics::NewProp_Hole_MetaData[] = {
+		{ "Category", "ThisCharacter" },
+		{ "ModuleRelativePath", "ThisCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AThisCharacter_Statics::NewProp_Hole = { "Hole", nullptr, (EPropertyFlags)0x0024080000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AThisCharacter, Hole), Z_Construct_UClass_AActor_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_AThisCharacter_Statics::NewProp_Hole_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AThisCharacter_Statics::NewProp_Hole_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AThisCharacter_Statics::NewProp_Teleport_MetaData[] = {
+		{ "Category", "ThisCharacter" },
+		{ "ModuleRelativePath", "ThisCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AThisCharacter_Statics::NewProp_Teleport = { "Teleport", nullptr, (EPropertyFlags)0x0024080000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AThisCharacter, Teleport), Z_Construct_UClass_AActor_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_AThisCharacter_Statics::NewProp_Teleport_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AThisCharacter_Statics::NewProp_Teleport_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AThisCharacter_Statics::NewProp_Spring_MetaData[] = {
 		{ "Category", "ThisCharacter" },
 		{ "EditInline", "true" },
@@ -111,6 +133,8 @@ void EmptyLinkFunctionForGeneratedCodeThisCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AThisCharacter_Statics::NewProp_fJumpForce,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AThisCharacter_Statics::NewProp_shotPos,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AThisCharacter_Statics::NewProp_Projectile,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AThisCharacter_Statics::NewProp_Hole,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AThisCharacter_Statics::NewProp_Teleport,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AThisCharacter_Statics::NewProp_Spring,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AThisCharacter_Statics::NewProp_Camera,
 	};
@@ -150,9 +174,9 @@ void EmptyLinkFunctionForGeneratedCodeThisCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Pogy_Source_Pogy_ThisCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AThisCharacter, AThisCharacter::StaticClass, TEXT("AThisCharacter"), &Z_Registration_Info_UClass_AThisCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AThisCharacter), 695807319U) },
+		{ Z_Construct_UClass_AThisCharacter, AThisCharacter::StaticClass, TEXT("AThisCharacter"), &Z_Registration_Info_UClass_AThisCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AThisCharacter), 382618801U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Pogy_Source_Pogy_ThisCharacter_h_841144780(TEXT("/Script/Pogy"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Pogy_Source_Pogy_ThisCharacter_h_2703840422(TEXT("/Script/Pogy"),
 		Z_CompiledInDeferFile_FID_Pogy_Source_Pogy_ThisCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Pogy_Source_Pogy_ThisCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

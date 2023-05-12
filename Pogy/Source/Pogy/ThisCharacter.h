@@ -26,6 +26,10 @@ protected:
 	FVector shotPos;
 	UPROPERTY(EditAnywhere);
 	TSubclassOf<AActor> Projectile;
+	UPROPERTY(EditAnywhere);
+	TSubclassOf<AActor> Hole;
+	UPROPERTY(EditAnywhere);
+	TSubclassOf<AActor> Teleport;
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* Spring;
 	UPROPERTY(VisibleAnywhere)
@@ -38,6 +42,12 @@ protected:
 	void MoveRight(float Value);
 
 	void PrimaryAttack();
+
+	void SecondaryAttack();
+
+	void Teleporting();
+
+	void SpawnProjectile(TSubclassOf<AActor> ClassToSpawn);
 	
 public:	
 	// Called every frame

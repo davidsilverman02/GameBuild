@@ -3,10 +3,10 @@
 
 #include "MagicProjectile.h"
 
-#include "MagicProjectile.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AMagicProjectile::AMagicProjectile()
@@ -24,6 +24,7 @@ AMagicProjectile::AMagicProjectile()
 	Projectan->InitialSpeed = speed;
 	Projectan->bRotationFollowsVelocity = true;
 	Projectan->bInitialVelocityInLocalSpace = true;
+	Projectan->ProjectileGravityScale = 0;
 }
 
 // Called when the game starts or when spawned
@@ -40,3 +41,35 @@ void AMagicProjectile::Tick(float DeltaTime)
 
 }
 
+
+
+void AMagicProjectile::Explode_Implementation()
+{
+	// Check to make sure we aren't already being 'destroyed'
+	// Adding ensure to see if we encounter this situation at all
+	if (ensure(IsValid(this)))
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, ImpactVFX, GetActorLocation(), GetActorRotation());
+
+		//UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());
+
+		//UGameplayStatics::PlayWorldCameraShake(this, ImpactShake, GetActorLocation(), ImpactShakeInnerRadius, ImpactShakeOuterRadius);
+
+		Destroy();
+	}
+}
+
+void AMagicProjectile::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	//SphereComp->IgnoreActorWhenMoving(GetInstigator(), true);
+	
+	// More consistent to bind here compared to Constructor which may fail to bind if Blueprint was created before adding this binding (or when using hotreload)
+	// PostInitializeComponent is the preferred way of binding any events.
+	Sphere->OnComponentHit.AddDynamic(this, &AMagicProjectile::OnActorHit);
+}
+
+void AMagicProjectile::OnActorHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	Explode();
+}

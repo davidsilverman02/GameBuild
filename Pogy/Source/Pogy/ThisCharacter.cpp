@@ -5,6 +5,7 @@
 
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "CollisionQueryParams.h"
 #include "Physics/ImmediatePhysics/ImmediatePhysicsShared/ImmediatePhysicsCore.h"
 
 // Sets default values
@@ -44,6 +45,8 @@ void AThisCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAction("PrimaryAttack", IE_Pressed, this, &AThisCharacter::PrimaryAttack);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AThisCharacter::Jump);
+	PlayerInputComponent->BindAction("BlackHole", IE_Pressed, this, &AThisCharacter::SecondaryAttack);
+	PlayerInputComponent->BindAction("Teleport", IE_Pressed, this, &AThisCharacter::Teleporting);
 }
 
 void AThisCharacter::MoveForward(float Value)
@@ -67,11 +70,58 @@ void AThisCharacter::MoveRight(float Value)
 void AThisCharacter::PrimaryAttack()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Your message"));
-	FTransform SpawnT = FTransform(GetControlRotation(), GetActorLocation());
-	FActorSpawnParameters SpawnP;
-	SpawnP.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	GetWorld()->SpawnActor<AActor>(Projectile, SpawnT, SpawnP);
+	SpawnProjectile(Projectile);
 }
+
+void AThisCharacter::SecondaryAttack()
+{
+	SpawnProjectile(Hole);
+}
+
+void AThisCharacter::Teleporting()
+{
+	SpawnProjectile(Teleport);
+}
+
+void AThisCharacter::SpawnProjectile(TSubclassOf<AActor> ClassToSpawn)
+{
+	if(ensureAlways(ClassToSpawn))
+	{
+		FVector Muzzle = GetActorLocation();
+
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+		SpawnParams.Instigator = this;
+
+		FCollisionShape Shape;
+		Shape.SetSphere(20);
+
+		FCollisionQueryParams Params;
+		Params.AddIgnoredActor(this);
+		
+		FCollisionObjectQueryParams ObjParams;
+		ObjParams.AddObjectTypesToQuery(ECC_WorldDynamic);
+		ObjParams.AddObjectTypesToQuery(ECC_WorldStatic);
+		ObjParams.AddObjectTypesToQuery(ECC_Pawn);
+
+		FVector TraceStart = Camera->GetComponentLocation();
+
+		FVector TraceEnd = Camera->GetComponentLocation() + (GetControlRotation().Vector() * 5000);
+
+		FHitResult Hit;
+
+		if(GetWorld()->SweepSingleByObjectType(Hit, TraceStart, TraceEnd, FQuat::Identity, ObjParams, Shape, Params))
+		{
+			TraceEnd = Hit.ImpactPoint;
+		}
+
+		FRotator ProjRotation = FRotationMatrix::MakeFromX(TraceEnd - Muzzle).Rotator();
+
+		FTransform SpawnTM = FTransform(ProjRotation, Muzzle);
+		GetWorld()->SpawnActor<AActor>(ClassToSpawn, SpawnTM, SpawnParams);
+	}
+}
+
 
 
 
