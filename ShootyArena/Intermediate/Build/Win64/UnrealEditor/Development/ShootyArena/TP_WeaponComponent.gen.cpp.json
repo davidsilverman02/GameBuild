@@ -1,0 +1,15 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\inc\\shootyarena\\tp_weaponcomponent.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\shootyarenaeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\development\\shootyarena\\definitions.shootyarena.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\source\\shootyarena\\tp_weaponcomponent.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\inc\\shootyarena\\tp_weaponcomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

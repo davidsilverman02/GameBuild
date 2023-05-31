@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\david.silverman\\source\\repos\\GameBuild\\ShootyArena\\Source\\ShootyArena\\ShootyArena.Build.cs",
+		"C:\\Users\\david.silverman\\source\\repos\\GameBuild\\ShootyArena\\Source\\ShootyArena.Target.cs",
+		"C:\\Users\\david.silverman\\source\\repos\\GameBuild\\ShootyArena\\Source\\ShootyArenaEditor.Target.cs"
+	],
+	"EngineVersion": "5.0.3"
+}

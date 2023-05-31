@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "ShootyArena",
+			"Path": "C:\\Users\\david.silverman\\source\\repos\\GameBuild\\ShootyArena\\Source\\ShootyArena.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "ShootyArenaEditor",
+			"Path": "C:\\Users\\david.silverman\\source\\repos\\GameBuild\\ShootyArena\\Source\\ShootyArenaEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
