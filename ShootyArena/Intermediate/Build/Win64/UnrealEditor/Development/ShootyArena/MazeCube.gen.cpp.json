@@ -1,0 +1,19 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\inc\\shootyarena\\mazecube.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\shootyarenaeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\development\\shootyarena\\definitions.shootyarena.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\source\\shootyarena\\mazecube.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\engine\\pointlight.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\engine\\light.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\light.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\pointlight.generated.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\inc\\shootyarena\\mazecube.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
