@@ -64,6 +64,10 @@ void EmptyLinkFunctionForGeneratedCodeShootyArenaCharacter() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_FirstPersonCameraComponent;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_JumpSpeed_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_JumpSpeed;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_TurnRateGamepad_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_TurnRateGamepad;
@@ -108,6 +112,13 @@ void EmptyLinkFunctionForGeneratedCodeShootyArenaCharacter() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_FirstPersonCameraComponent = { "FirstPersonCameraComponent", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AShootyArenaCharacter, FirstPersonCameraComponent), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_FirstPersonCameraComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_FirstPersonCameraComponent_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_JumpSpeed_MetaData[] = {
+		{ "Category", "ShootyArenaCharacter" },
+		{ "ModuleRelativePath", "ShootyArenaCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_JumpSpeed = { "JumpSpeed", nullptr, (EPropertyFlags)0x0020080000020005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AShootyArenaCharacter, JumpSpeed), METADATA_PARAMS(Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_JumpSpeed_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_JumpSpeed_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_TurnRateGamepad_MetaData[] = {
 		{ "Category", "Camera" },
 		{ "Comment", "/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */" },
@@ -128,6 +139,7 @@ void EmptyLinkFunctionForGeneratedCodeShootyArenaCharacter() {}
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AShootyArenaCharacter_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Mesh1P,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_FirstPersonCameraComponent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_JumpSpeed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_TurnRateGamepad,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_OnUseItem,
 	};
@@ -167,9 +179,9 @@ void EmptyLinkFunctionForGeneratedCodeShootyArenaCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ShootyArenaCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AShootyArenaCharacter, AShootyArenaCharacter::StaticClass, TEXT("AShootyArenaCharacter"), &Z_Registration_Info_UClass_AShootyArenaCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AShootyArenaCharacter), 2760278184U) },
+		{ Z_Construct_UClass_AShootyArenaCharacter, AShootyArenaCharacter::StaticClass, TEXT("AShootyArenaCharacter"), &Z_Registration_Info_UClass_AShootyArenaCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AShootyArenaCharacter), 2618916389U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ShootyArenaCharacter_h_1924735483(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ShootyArenaCharacter_h_3280050761(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ShootyArenaCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ShootyArenaCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -13,14 +13,23 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	SHOOTYARENA_API UClass* Z_Construct_UClass_AMazeCube();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	UPackage* Z_Construct_UPackage__Script_ShootyArena();
-	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector3f();
+	ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FIntVector();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UPointLightComponent_NoRegister();
 // End Cross Module References
+	DEFINE_FUNCTION(AMazeCube::execGetClog)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->GetClog();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMazeCube::execWestPoint)
 	{
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(FVector3f*)Z_Param__Result=P_THIS->WestPoint();
+		*(FIntVector*)Z_Param__Result=P_THIS->WestPoint();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMazeCube::execSetWest)
@@ -42,7 +51,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(FVector3f*)Z_Param__Result=P_THIS->EastPoint();
+		*(FIntVector*)Z_Param__Result=P_THIS->EastPoint();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMazeCube::execSetEast)
@@ -64,7 +73,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(FVector3f*)Z_Param__Result=P_THIS->SouthPoint();
+		*(FIntVector*)Z_Param__Result=P_THIS->SouthPoint();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMazeCube::execSetSouth)
@@ -86,7 +95,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(FVector3f*)Z_Param__Result=P_THIS->NorthPoint();
+		*(FIntVector*)Z_Param__Result=P_THIS->NorthPoint();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMazeCube::execSetNorth)
@@ -108,7 +117,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(FVector3f*)Z_Param__Result=P_THIS->DownPoint();
+		*(FIntVector*)Z_Param__Result=P_THIS->DownPoint();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMazeCube::execSetDown)
@@ -130,7 +139,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(FVector3f*)Z_Param__Result=P_THIS->UpPoint();
+		*(FIntVector*)Z_Param__Result=P_THIS->UpPoint();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMazeCube::execSetUp)
@@ -152,15 +161,24 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(FVector3f*)Z_Param__Result=P_THIS->GetNode();
+		*(FIntVector*)Z_Param__Result=P_THIS->GetNode();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMazeCube::execSetNode)
 	{
-		P_GET_STRUCT(FVector3f,Z_Param_vec);
+		P_GET_STRUCT(FIntVector,Z_Param_vec);
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		P_THIS->SetNode_Implementation(Z_Param_vec);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMazeCube::execActiveWall)
+	{
+		P_GET_UBOOL(Z_Param_Use);
+		P_GET_OBJECT(USceneComponent,Z_Param_Comp);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ActiveWall(Z_Param_Use,Z_Param_Comp);
 		P_NATIVE_END;
 	}
 	static FName NAME_AMazeCube_SetDown = FName(TEXT("SetDown"));
@@ -178,7 +196,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 		ProcessEvent(FindFunctionChecked(NAME_AMazeCube_SetEast),&Parms);
 	}
 	static FName NAME_AMazeCube_SetNode = FName(TEXT("SetNode"));
-	void AMazeCube::SetNode(FVector3f vec)
+	void AMazeCube::SetNode(FIntVector vec)
 	{
 		MazeCube_eventSetNode_Parms Parms;
 		Parms.vec=vec;
@@ -216,8 +234,10 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		UClass* Class = AMazeCube::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "ActiveWall", &AMazeCube::execActiveWall },
 			{ "DownPoint", &AMazeCube::execDownPoint },
 			{ "EastPoint", &AMazeCube::execEastPoint },
+			{ "GetClog", &AMazeCube::execGetClog },
 			{ "GetDown", &AMazeCube::execGetDown },
 			{ "GetEast", &AMazeCube::execGetEast },
 			{ "GetNode", &AMazeCube::execGetNode },
@@ -239,11 +259,60 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
+	struct Z_Construct_UFunction_AMazeCube_ActiveWall_Statics
+	{
+		struct MazeCube_eventActiveWall_Parms
+		{
+			bool Use;
+			USceneComponent* Comp;
+		};
+		static void NewProp_Use_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_Use;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Comp_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Comp;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::NewProp_Use_SetBit(void* Obj)
+	{
+		((MazeCube_eventActiveWall_Parms*)Obj)->Use = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::NewProp_Use = { "Use", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(MazeCube_eventActiveWall_Parms), &Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::NewProp_Use_SetBit, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::NewProp_Comp_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::NewProp_Comp = { "Comp", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventActiveWall_Parms, Comp), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::NewProp_Comp_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::NewProp_Comp_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::NewProp_Use,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::NewProp_Comp,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "MazeCube.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMazeCube, nullptr, "ActiveWall", nullptr, nullptr, sizeof(Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::MazeCube_eventActiveWall_Parms), Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMazeCube_ActiveWall()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMazeCube_ActiveWall_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_AMazeCube_DownPoint_Statics
 	{
 		struct MazeCube_eventDownPoint_Parms
 		{
-			FVector3f ReturnValue;
+			FIntVector ReturnValue;
 		};
 		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -252,7 +321,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_DownPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventDownPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FVector3f, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_DownPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventDownPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMazeCube_DownPoint_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_DownPoint_Statics::NewProp_ReturnValue,
 	};
@@ -275,7 +344,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		struct MazeCube_eventEastPoint_Parms
 		{
-			FVector3f ReturnValue;
+			FIntVector ReturnValue;
 		};
 		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -284,7 +353,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_EastPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventEastPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FVector3f, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_EastPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventEastPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMazeCube_EastPoint_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_EastPoint_Statics::NewProp_ReturnValue,
 	};
@@ -300,6 +369,43 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMazeCube_EastPoint_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMazeCube_GetClog_Statics
+	{
+		struct MazeCube_eventGetClog_Parms
+		{
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_AMazeCube_GetClog_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((MazeCube_eventGetClog_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AMazeCube_GetClog_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(MazeCube_eventGetClog_Parms), &Z_Construct_UFunction_AMazeCube_GetClog_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMazeCube_GetClog_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_GetClog_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMazeCube_GetClog_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "MazeCube.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMazeCube_GetClog_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMazeCube, nullptr, "GetClog", nullptr, nullptr, sizeof(Z_Construct_UFunction_AMazeCube_GetClog_Statics::MazeCube_eventGetClog_Parms), Z_Construct_UFunction_AMazeCube_GetClog_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMazeCube_GetClog_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMazeCube_GetClog_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMazeCube_GetClog_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMazeCube_GetClog()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMazeCube_GetClog_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -381,7 +487,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		struct MazeCube_eventGetNode_Parms
 		{
-			FVector3f ReturnValue;
+			FIntVector ReturnValue;
 		};
 		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -390,7 +496,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_GetNode_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventGetNode_Parms, ReturnValue), Z_Construct_UScriptStruct_FVector3f, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_GetNode_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventGetNode_Parms, ReturnValue), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMazeCube_GetNode_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_GetNode_Statics::NewProp_ReturnValue,
 	};
@@ -561,7 +667,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		struct MazeCube_eventNorthPoint_Parms
 		{
-			FVector3f ReturnValue;
+			FIntVector ReturnValue;
 		};
 		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -570,7 +676,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_NorthPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventNorthPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FVector3f, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_NorthPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventNorthPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMazeCube_NorthPoint_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_NorthPoint_Statics::NewProp_ReturnValue,
 	};
@@ -664,7 +770,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_SetNode_Statics::NewProp_vec = { "vec", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventSetNode_Parms, vec), Z_Construct_UScriptStruct_FVector3f, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_SetNode_Statics::NewProp_vec = { "vec", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventSetNode_Parms, vec), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMazeCube_SetNode_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_SetNode_Statics::NewProp_vec,
 	};
@@ -819,7 +925,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		struct MazeCube_eventSouthPoint_Parms
 		{
-			FVector3f ReturnValue;
+			FIntVector ReturnValue;
 		};
 		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -828,7 +934,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_SouthPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventSouthPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FVector3f, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_SouthPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventSouthPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMazeCube_SouthPoint_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_SouthPoint_Statics::NewProp_ReturnValue,
 	};
@@ -851,7 +957,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		struct MazeCube_eventUpPoint_Parms
 		{
-			FVector3f ReturnValue;
+			FIntVector ReturnValue;
 		};
 		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -860,7 +966,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_UpPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventUpPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FVector3f, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_UpPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventUpPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMazeCube_UpPoint_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_UpPoint_Statics::NewProp_ReturnValue,
 	};
@@ -883,7 +989,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 	{
 		struct MazeCube_eventWestPoint_Parms
 		{
-			FVector3f ReturnValue;
+			FIntVector ReturnValue;
 		};
 		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -892,7 +998,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_WestPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventWestPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FVector3f, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMazeCube_WestPoint_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MazeCube_eventWestPoint_Parms, ReturnValue), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMazeCube_WestPoint_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMazeCube_WestPoint_Statics::NewProp_ReturnValue,
 	};
@@ -978,6 +1084,10 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_EastWall;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Light_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Light;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_NodePos_MetaData[];
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_NodePos;
@@ -990,26 +1100,28 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_ShootyArena,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMazeCube_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_AMazeCube_DownPoint, "DownPoint" }, // 4243090078
-		{ &Z_Construct_UFunction_AMazeCube_EastPoint, "EastPoint" }, // 108258105
+		{ &Z_Construct_UFunction_AMazeCube_ActiveWall, "ActiveWall" }, // 4041270278
+		{ &Z_Construct_UFunction_AMazeCube_DownPoint, "DownPoint" }, // 3496372292
+		{ &Z_Construct_UFunction_AMazeCube_EastPoint, "EastPoint" }, // 1158164348
+		{ &Z_Construct_UFunction_AMazeCube_GetClog, "GetClog" }, // 928289023
 		{ &Z_Construct_UFunction_AMazeCube_GetDown, "GetDown" }, // 1869064428
 		{ &Z_Construct_UFunction_AMazeCube_GetEast, "GetEast" }, // 771908344
-		{ &Z_Construct_UFunction_AMazeCube_GetNode, "GetNode" }, // 668484800
+		{ &Z_Construct_UFunction_AMazeCube_GetNode, "GetNode" }, // 1041415010
 		{ &Z_Construct_UFunction_AMazeCube_GetNorth, "GetNorth" }, // 3364170657
 		{ &Z_Construct_UFunction_AMazeCube_GetSouth, "GetSouth" }, // 2552832392
 		{ &Z_Construct_UFunction_AMazeCube_GetUp, "GetUp" }, // 1976539967
 		{ &Z_Construct_UFunction_AMazeCube_GetWest, "GetWest" }, // 2125122312
-		{ &Z_Construct_UFunction_AMazeCube_NorthPoint, "NorthPoint" }, // 3649843326
+		{ &Z_Construct_UFunction_AMazeCube_NorthPoint, "NorthPoint" }, // 1406176742
 		{ &Z_Construct_UFunction_AMazeCube_SetDown, "SetDown" }, // 977180094
 		{ &Z_Construct_UFunction_AMazeCube_SetEast, "SetEast" }, // 2665117664
-		{ &Z_Construct_UFunction_AMazeCube_SetNode, "SetNode" }, // 81352652
+		{ &Z_Construct_UFunction_AMazeCube_SetNode, "SetNode" }, // 1579365304
 		{ &Z_Construct_UFunction_AMazeCube_SetNorth, "SetNorth" }, // 1953927585
 		{ &Z_Construct_UFunction_AMazeCube_SetSouth, "SetSouth" }, // 36302607
 		{ &Z_Construct_UFunction_AMazeCube_SetUp, "SetUp" }, // 2430559787
 		{ &Z_Construct_UFunction_AMazeCube_SetWest, "SetWest" }, // 4217890494
-		{ &Z_Construct_UFunction_AMazeCube_SouthPoint, "SouthPoint" }, // 3217697586
-		{ &Z_Construct_UFunction_AMazeCube_UpPoint, "UpPoint" }, // 402741212
-		{ &Z_Construct_UFunction_AMazeCube_WestPoint, "WestPoint" }, // 851401328
+		{ &Z_Construct_UFunction_AMazeCube_SouthPoint, "SouthPoint" }, // 2203125039
+		{ &Z_Construct_UFunction_AMazeCube_UpPoint, "UpPoint" }, // 2518724780
+		{ &Z_Construct_UFunction_AMazeCube_WestPoint, "WestPoint" }, // 62181135
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMazeCube_Statics::Class_MetaDataParams[] = {
@@ -1132,12 +1244,20 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMazeCube_Statics::NewProp_EastWall = { "EastWall", nullptr, (EPropertyFlags)0x0020080000080009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMazeCube, EastWall), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMazeCube_Statics::NewProp_EastWall_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMazeCube_Statics::NewProp_EastWall_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMazeCube_Statics::NewProp_Light_MetaData[] = {
+		{ "Category", "MazeCube" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "MazeCube.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMazeCube_Statics::NewProp_Light = { "Light", nullptr, (EPropertyFlags)0x0020080000080009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMazeCube, Light), Z_Construct_UClass_UPointLightComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMazeCube_Statics::NewProp_Light_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMazeCube_Statics::NewProp_Light_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMazeCube_Statics::NewProp_NodePos_MetaData[] = {
 		{ "Category", "MazeCube" },
 		{ "ModuleRelativePath", "MazeCube.h" },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AMazeCube_Statics::NewProp_NodePos = { "NodePos", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMazeCube, NodePos), Z_Construct_UScriptStruct_FVector3f, METADATA_PARAMS(Z_Construct_UClass_AMazeCube_Statics::NewProp_NodePos_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMazeCube_Statics::NewProp_NodePos_MetaData)) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AMazeCube_Statics::NewProp_NodePos = { "NodePos", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMazeCube, NodePos), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(Z_Construct_UClass_AMazeCube_Statics::NewProp_NodePos_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMazeCube_Statics::NewProp_NodePos_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMazeCube_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMazeCube_Statics::NewProp_bUp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMazeCube_Statics::NewProp_UpWall,
@@ -1151,6 +1271,7 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMazeCube_Statics::NewProp_WestWall,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMazeCube_Statics::NewProp_bEast,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMazeCube_Statics::NewProp_EastWall,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMazeCube_Statics::NewProp_Light,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMazeCube_Statics::NewProp_NodePos,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AMazeCube_Statics::StaticCppClassTypeInfo = {
@@ -1189,9 +1310,9 @@ void EmptyLinkFunctionForGeneratedCodeMazeCube() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_MazeCube_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMazeCube, AMazeCube::StaticClass, TEXT("AMazeCube"), &Z_Registration_Info_UClass_AMazeCube, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMazeCube), 4252887353U) },
+		{ Z_Construct_UClass_AMazeCube, AMazeCube::StaticClass, TEXT("AMazeCube"), &Z_Registration_Info_UClass_AMazeCube, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMazeCube), 2367428077U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_MazeCube_h_1042585080(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_MazeCube_h_3256444636(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_MazeCube_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_MazeCube_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

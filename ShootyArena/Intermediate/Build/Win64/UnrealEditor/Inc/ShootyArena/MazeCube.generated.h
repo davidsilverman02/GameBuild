@@ -8,6 +8,8 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+struct FIntVector;
+class USceneComponent;
 #ifdef SHOOTYARENA_MazeCube_generated_h
 #error "MazeCube.generated.h already included, missing '#pragma once' in MazeCube.h"
 #endif
@@ -21,8 +23,9 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	virtual void SetNorth_Implementation(bool newB); \
 	virtual void SetDown_Implementation(bool newB); \
 	virtual void SetUp_Implementation(bool newB); \
-	virtual void SetNode_Implementation(FVector3f vec); \
+	virtual void SetNode_Implementation(FIntVector vec); \
  \
+	DECLARE_FUNCTION(execGetClog); \
 	DECLARE_FUNCTION(execWestPoint); \
 	DECLARE_FUNCTION(execSetWest); \
 	DECLARE_FUNCTION(execGetWest); \
@@ -42,7 +45,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execSetUp); \
 	DECLARE_FUNCTION(execGetUp); \
 	DECLARE_FUNCTION(execGetNode); \
-	DECLARE_FUNCTION(execSetNode);
+	DECLARE_FUNCTION(execSetNode); \
+	DECLARE_FUNCTION(execActiveWall);
 
 
 #define FID_ShootyArena_Source_ShootyArena_MazeCube_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
@@ -52,8 +56,9 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	virtual void SetNorth_Implementation(bool newB); \
 	virtual void SetDown_Implementation(bool newB); \
 	virtual void SetUp_Implementation(bool newB); \
-	virtual void SetNode_Implementation(FVector3f vec); \
+	virtual void SetNode_Implementation(FIntVector vec); \
  \
+	DECLARE_FUNCTION(execGetClog); \
 	DECLARE_FUNCTION(execWestPoint); \
 	DECLARE_FUNCTION(execSetWest); \
 	DECLARE_FUNCTION(execGetWest); \
@@ -73,7 +78,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execSetUp); \
 	DECLARE_FUNCTION(execGetUp); \
 	DECLARE_FUNCTION(execGetNode); \
-	DECLARE_FUNCTION(execSetNode);
+	DECLARE_FUNCTION(execSetNode); \
+	DECLARE_FUNCTION(execActiveWall);
 
 
 #define FID_ShootyArena_Source_ShootyArena_MazeCube_h_13_EVENT_PARMS \
@@ -87,7 +93,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	}; \
 	struct MazeCube_eventSetNode_Parms \
 	{ \
-		FVector3f vec; \
+		FIntVector vec; \
 	}; \
 	struct MazeCube_eventSetNorth_Parms \
 	{ \

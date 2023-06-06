@@ -23,13 +23,13 @@ void EmptyLinkFunctionForGeneratedCodeShootyArena_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0xAF7259A0,
-				0xD63FA7ED,
+				0x9510CDBB,
+				0xDFA13438,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_ShootyArena.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_ShootyArena.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_ShootyArena(Z_Construct_UPackage__Script_ShootyArena, TEXT("/Script/ShootyArena"), Z_Registration_Info_UPackage__Script_ShootyArena, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xAF7259A0, 0xD63FA7ED));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_ShootyArena(Z_Construct_UPackage__Script_ShootyArena, TEXT("/Script/ShootyArena"), Z_Registration_Info_UPackage__Script_ShootyArena, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x9510CDBB, 0xDFA13438));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -55,9 +55,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category= "Walls")
 	UStaticMeshComponent* EastWall;
+
+	UPROPERTY(EditAnywhere)
+	UPointLightComponent* Light;
 	
 	UPROPERTY(EditAnywhere)
-	FVector3f NodePos;
+	FIntVector NodePos;
 
 	UFUNCTION(BlueprintCallable)
 	void ActiveWall(bool Use, USceneComponent* Comp);
@@ -66,10 +69,10 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable, Server, Reliable)
-	void SetNode(FVector3f vec);
+	void SetNode(FIntVector vec);
 
 	UFUNCTION(BlueprintCallable)
-	FVector3f GetNode();
+	FIntVector GetNode();
 
 	UFUNCTION(BlueprintCallable)
 	bool GetUp();
@@ -78,7 +81,7 @@ public:
 	void SetUp(bool newB);
 
 	UFUNCTION(BlueprintCallable)
-	FVector3f UpPoint();
+	FIntVector UpPoint();
 
 	UFUNCTION(BlueprintCallable)
 	bool GetDown();
@@ -87,7 +90,7 @@ public:
 	void SetDown(bool newB);
 
 	UFUNCTION(BlueprintCallable)
-	FVector3f DownPoint();
+	FIntVector DownPoint();
 
 	UFUNCTION(BlueprintCallable)
 	bool GetNorth();
@@ -96,7 +99,7 @@ public:
 	void SetNorth(bool newB);
 
 	UFUNCTION(BlueprintCallable)
-	FVector3f NorthPoint();
+	FIntVector NorthPoint();
 
 	UFUNCTION(BlueprintCallable)
 	bool GetSouth();
@@ -105,7 +108,7 @@ public:
 	void SetSouth(bool newB);
 
 	UFUNCTION(BlueprintCallable)
-	FVector3f SouthPoint();
+	FIntVector SouthPoint();
 
 	UFUNCTION(BlueprintCallable)
 	bool GetEast();
@@ -114,7 +117,7 @@ public:
 	void SetEast(bool newB);
 
 	UFUNCTION(BlueprintCallable)
-	FVector3f EastPoint();
+	FIntVector EastPoint();
 
 	UFUNCTION(BlueprintCallable)
 	bool GetWest();
@@ -123,6 +126,8 @@ public:
 	void SetWest(bool newB);
 
 	UFUNCTION(BlueprintCallable)
-	FVector3f WestPoint();
-	
+	FIntVector WestPoint();
+
+	UFUNCTION(BlueprintCallable)
+	bool GetClog();
 };

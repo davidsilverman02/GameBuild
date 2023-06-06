@@ -3,7 +3,9 @@
 
 #include "MazeCube.h"
 
-class APointLight;
+#include "Components/PointLightComponent.h"
+
+class UPointLightComponent;
 class UStaticMeshComponent;
 
 // Sets default values
@@ -29,6 +31,9 @@ AMazeCube::AMazeCube()
 
 	WestWall = CreateDefaultSubobject<UStaticMeshComponent>("West");
 	WestWall->SetupAttachment(RootComponent);
+
+	Light = CreateDefaultSubobject<UPointLightComponent>("Light");
+	Light->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -45,12 +50,12 @@ void AMazeCube::Tick(float DeltaTime)
 
 }
 
-void AMazeCube::SetNode_Implementation(FVector3f vec)
+void AMazeCube::SetNode_Implementation(FIntVector vec)
 {
 	NodePos = vec;
 }
 
-FVector3f AMazeCube::GetNode()
+FIntVector AMazeCube::GetNode()
 {
 	return NodePos;
 }
@@ -66,9 +71,9 @@ void AMazeCube::SetUp_Implementation(bool newB)
 	ActiveWall(bUp, UpWall);
 }
 
-FVector3f AMazeCube::UpPoint()
+FIntVector AMazeCube::UpPoint()
 {
-	return FVector3f(NodePos.X, NodePos.Y, NodePos.Z + 1);
+	return FIntVector(NodePos.X, NodePos.Y, NodePos.Z + 1);
 }
 
 bool AMazeCube::GetDown()
@@ -82,9 +87,9 @@ void AMazeCube::SetDown_Implementation(bool newB)
 	ActiveWall(bDown, DownWall);
 }
 
-FVector3f AMazeCube::DownPoint()
+FIntVector AMazeCube::DownPoint()
 {
-	return FVector3f(NodePos.X, NodePos.Y, NodePos.Z - 1);
+	return FIntVector(NodePos.X, NodePos.Y, NodePos.Z - 1);
 }
 
 bool AMazeCube::GetNorth()
@@ -98,9 +103,9 @@ void AMazeCube::SetNorth_Implementation(bool newB)
 	ActiveWall(bNorth, NorthWall);
 }
 
-FVector3f AMazeCube::NorthPoint()
+FIntVector AMazeCube::NorthPoint()
 {
-	return FVector3f(NodePos.X, NodePos.Y + 1, NodePos.Z);
+	return FIntVector(NodePos.X, NodePos.Y + 1, NodePos.Z);
 }
 
 bool AMazeCube::GetSouth()
@@ -114,9 +119,9 @@ void AMazeCube::SetSouth_Implementation(bool newB)
 	ActiveWall(bSouth, SouthWall);
 }
 
-FVector3f AMazeCube::SouthPoint()
+FIntVector AMazeCube::SouthPoint()
 {
-	return FVector3f(NodePos.X, NodePos.Y - 1, NodePos.Z);
+	return FIntVector(NodePos.X, NodePos.Y - 1, NodePos.Z);
 }
 
 bool AMazeCube::GetEast()
@@ -130,9 +135,9 @@ void AMazeCube::SetEast_Implementation(bool newB)
 	ActiveWall(bEast, EastWall);
 }
 
-FVector3f AMazeCube::EastPoint()
+FIntVector AMazeCube::EastPoint()
 {
-	return FVector3f(NodePos.X + 1, NodePos.Y, NodePos.Z);
+	return FIntVector(NodePos.X + 1, NodePos.Y, NodePos.Z);
 }
 
 bool AMazeCube::GetWest()
@@ -146,9 +151,9 @@ void AMazeCube::SetWest_Implementation(bool newB)
 	ActiveWall(bWest, WestWall);
 }
 
-FVector3f AMazeCube::WestPoint()
+FIntVector AMazeCube::WestPoint()
 {
-	return FVector3f(NodePos.X - 1, NodePos.Y, NodePos.Z);
+	return FIntVector(NodePos.X - 1, NodePos.Y, NodePos.Z);
 }
 
 void AMazeCube::ActiveWall(bool Use, USceneComponent* Comp)
@@ -158,6 +163,15 @@ void AMazeCube::ActiveWall(bool Use, USceneComponent* Comp)
 	else
 		Comp->Deactivate();
 }
+
+bool AMazeCube::GetClog()
+{
+	if((bNorth == false || bSouth == false) ^ (bEast == false || bWest == false) ^ (bUp == false || bDown == false))
+		return true;
+	else
+		return false;
+}
+
 
 
 

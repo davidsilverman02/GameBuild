@@ -123,6 +123,12 @@ void AShootyArenaCharacter::MoveRight(float Value)
 	}
 }
 
+void AShootyArenaCharacter::FlightMove()
+{
+	
+}
+
+
 void AShootyArenaCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information

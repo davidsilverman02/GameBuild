@@ -36,6 +36,8 @@ public:
 protected:
 	virtual void BeginPlay();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float JumpSpeed;
 public:
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -44,6 +46,8 @@ public:
 	/** Delegate to whom anyone can subscribe to receive this event */
 	UPROPERTY(BlueprintAssignable, Category = "Interaction")
 	FOnUseItem OnUseItem;
+
+	
 protected:
 	
 	/** Fires a projectile. */
@@ -54,6 +58,8 @@ protected:
 
 	/** Handles strafing movement, left and right */
 	void MoveRight(float Val);
+
+	void FlightMove();
 
 	/**
 	 * Called via input to turn at a given rate.
