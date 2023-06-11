@@ -6,6 +6,8 @@
 #include "ShootyArenaProjectile.h"
 #include "GameFramework/PlayerController.h"
 #include "Camera/PlayerCameraManager.h"
+#include "ActionComponent.h"
+#include "SWarningOrErrorBox.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -13,6 +15,7 @@ UTP_WeaponComponent::UTP_WeaponComponent()
 {
 	// Default offset from the character location for projectiles to spawn
 	MuzzleOffset = FVector(100.0f, 0.0f, 10.0f);
+	//ReferCom();
 }
 
 
@@ -77,10 +80,28 @@ void UTP_WeaponComponent::AttachWeapon(AShootyArenaCharacter* TargetCharacter)
 	{
 		// Attach the weapon to the First Person Character
 		FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
+		ReferCom();
 		GetOwner()->AttachToComponent(Character->GetMesh1P(),AttachmentRules, FName(TEXT("GripPoint")));
-
 		// Register so that Fire is called every time the character tries to use the item being held
 		Character->OnUseItem.AddDynamic(this, &UTP_WeaponComponent::Fire);
+		Linked->IgnoredItem = Character;
 	}
 }
+
+AShootyArenaCharacter* UTP_WeaponComponent::GetChar()
+{
+	return Character;
+}
+
+void UTP_WeaponComponent::ReferCom()
+{
+	if(ensure(GetOwner()->FindComponentByClass<UActionComponent>()))
+	{
+		Linked = GetOwner()->FindComponentByClass<UActionComponent>();
+	}
+}
+
+//void
+
+
 

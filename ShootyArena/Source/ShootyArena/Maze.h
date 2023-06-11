@@ -52,7 +52,7 @@ protected:
 	TMap<int, bool> Visit;
 	
 	UPROPERTY(EditAnywhere)
-	UObject* RoomMake;
+	AMazeCube* RoomMake;
 
 	UPROPERTY(EditAnywhere)
 	bool bHasStarted;

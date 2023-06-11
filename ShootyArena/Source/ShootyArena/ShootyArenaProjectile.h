@@ -25,6 +25,8 @@ class AShootyArenaProjectile : public AActor
 public:
 	AShootyArenaProjectile();
 
+	AActor* Instigator;
+
 	/** called when projectile hits something */
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);

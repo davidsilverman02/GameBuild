@@ -10,12 +10,10 @@ AMaze::AMaze()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	RoomMake = CreateDefaultSubobject<UObject>("Ite");
 	halfWidth = 4;
 	halfDepth = 4;
 	halfHeight = 4;
 	RoomSizeInUnits = FVector3f(800, 800, 800);
-	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	//SpawnParams.Instigator = this;
 }
 
@@ -62,7 +60,7 @@ void AMaze::PlaceNodes_Implementation()
 				{
 					RoomPos.Z = k * RoomSizeInUnits.Z;
 					SpawnTM = FTransform(BaseRot, RoomPos);
-					//GetWorld()->SpawnActor<AActor>(RoomMake, SpawnTM, SpawnParams);
+					GetWorld()->SpawnActor<AActor>(RoomMake, RoomPos, BaseRot, SpawnParams);
 					//Adjacent.Add(GetWorld()->SpawnActor<UObject>(RoomMake, SpawnTM, SpawnParams));
 					Visit.Add(false);
 				}

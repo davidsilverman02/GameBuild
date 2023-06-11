@@ -3,10 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ActionComponent.h"
 #include "Components/ActorComponent.h"
 #include "TP_WeaponComponent.generated.h"
 
 class AShootyArenaCharacter;
+class UActionComponent;
 
 UCLASS(Blueprintable, BlueprintType, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SHOOTYARENA_API UTP_WeaponComponent : public UActorComponent
@@ -30,6 +32,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
 	FVector MuzzleOffset;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
+	UActionComponent* Actions;
+	
 	/** Sets default values for this component's properties */
 	UTP_WeaponComponent();
 
@@ -41,13 +46,26 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Weapon")
 	void Fire();
 
+	UFUNCTION(BlueprintCallable, Category="Weapon")
+	AShootyArenaCharacter* GetChar();
+
 protected:
 	/** Ends gameplay for this component. */
 	UFUNCTION()
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+
+	void ServerShoot();
+	
+	UFUNCTION(Server, Reliable)
+	void ClientShoot();
 		
 
 private:
 	/** The Character holding this weapon*/
 	AShootyArenaCharacter* Character;
+
+	UActionComponent* Linked;
+
+	UFUNCTION(BlueprintCallable)
+	void ReferCom();
 };

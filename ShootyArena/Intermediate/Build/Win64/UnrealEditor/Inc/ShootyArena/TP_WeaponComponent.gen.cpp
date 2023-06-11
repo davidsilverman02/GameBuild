@@ -20,13 +20,28 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 	ENGINE_API UClass* Z_Construct_UClass_USoundBase_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
+	SHOOTYARENA_API UClass* Z_Construct_UClass_UActionComponent_NoRegister();
 // End Cross Module References
+	DEFINE_FUNCTION(UTP_WeaponComponent::execReferCom)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ReferCom();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UTP_WeaponComponent::execEndPlay)
 	{
 		P_GET_PROPERTY(FByteProperty,Z_Param_EndPlayReason);
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		P_THIS->EndPlay(EEndPlayReason::Type(Z_Param_EndPlayReason));
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UTP_WeaponComponent::execGetChar)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(AShootyArenaCharacter**)Z_Param__Result=P_THIS->GetChar();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UTP_WeaponComponent::execFire)
@@ -51,6 +66,8 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 			{ "AttachWeapon", &UTP_WeaponComponent::execAttachWeapon },
 			{ "EndPlay", &UTP_WeaponComponent::execEndPlay },
 			{ "Fire", &UTP_WeaponComponent::execFire },
+			{ "GetChar", &UTP_WeaponComponent::execGetChar },
+			{ "ReferCom", &UTP_WeaponComponent::execReferCom },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -156,6 +173,61 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics
+	{
+		struct TP_WeaponComponent_eventGetChar_Parms
+		{
+			AShootyArenaCharacter* ReturnValue;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(TP_WeaponComponent_eventGetChar_Parms, ReturnValue), Z_Construct_UClass_AShootyArenaCharacter_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Weapon" },
+		{ "ModuleRelativePath", "TP_WeaponComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UTP_WeaponComponent, nullptr, "GetChar", nullptr, nullptr, sizeof(Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::TP_WeaponComponent_eventGetChar_Parms), Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UTP_WeaponComponent_GetChar()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UTP_WeaponComponent_GetChar_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UTP_WeaponComponent_ReferCom_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UTP_WeaponComponent_ReferCom_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "TP_WeaponComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UTP_WeaponComponent_ReferCom_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UTP_WeaponComponent, nullptr, "ReferCom", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04040401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UTP_WeaponComponent_ReferCom_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UTP_WeaponComponent_ReferCom_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UTP_WeaponComponent_ReferCom()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UTP_WeaponComponent_ReferCom_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UTP_WeaponComponent);
 	UClass* Z_Construct_UClass_UTP_WeaponComponent_NoRegister()
 	{
@@ -184,6 +256,10 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MuzzleOffset_MetaData[];
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_MuzzleOffset;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Actions_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Actions;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -196,6 +272,8 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 		{ &Z_Construct_UFunction_UTP_WeaponComponent_AttachWeapon, "AttachWeapon" }, // 2683251081
 		{ &Z_Construct_UFunction_UTP_WeaponComponent_EndPlay, "EndPlay" }, // 1634024272
 		{ &Z_Construct_UFunction_UTP_WeaponComponent_Fire, "Fire" }, // 3781507124
+		{ &Z_Construct_UFunction_UTP_WeaponComponent_GetChar, "GetChar" }, // 3188441144
+		{ &Z_Construct_UFunction_UTP_WeaponComponent_ReferCom, "ReferCom" }, // 4145572479
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UTP_WeaponComponent_Statics::Class_MetaDataParams[] = {
@@ -243,11 +321,20 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_MuzzleOffset = { "MuzzleOffset", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UTP_WeaponComponent, MuzzleOffset), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_MuzzleOffset_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_MuzzleOffset_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_Actions_MetaData[] = {
+		{ "Category", "Gameplay" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "TP_WeaponComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_Actions = { "Actions", nullptr, (EPropertyFlags)0x001000000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UTP_WeaponComponent, Actions), Z_Construct_UClass_UActionComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_Actions_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_Actions_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UTP_WeaponComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_ProjectileClass,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_FireSound,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_FireAnimation,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_MuzzleOffset,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTP_WeaponComponent_Statics::NewProp_Actions,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UTP_WeaponComponent_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UTP_WeaponComponent>::IsAbstract,
@@ -285,9 +372,9 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UTP_WeaponComponent, UTP_WeaponComponent::StaticClass, TEXT("UTP_WeaponComponent"), &Z_Registration_Info_UClass_UTP_WeaponComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UTP_WeaponComponent), 2804041121U) },
+		{ Z_Construct_UClass_UTP_WeaponComponent, UTP_WeaponComponent::StaticClass, TEXT("UTP_WeaponComponent"), &Z_Registration_Info_UClass_UTP_WeaponComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UTP_WeaponComponent), 434041799U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_3509675864(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_1697728888(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -16,7 +16,6 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FIntVector();
 	SHOOTYARENA_API UClass* Z_Construct_UClass_AMazeCube_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector3f();
-	COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 // End Cross Module References
 	DEFINE_FUNCTION(AMaze::execMakeClean)
 	{
@@ -692,7 +691,7 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 		{ "ModuleRelativePath", "Maze.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake = { "RoomMake", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, RoomMake), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake_MetaData)) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake = { "RoomMake", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, RoomMake), Z_Construct_UClass_AMazeCube_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_bHasStarted_MetaData[] = {
 		{ "Category", "Maze" },
@@ -827,9 +826,9 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMaze, AMaze::StaticClass, TEXT("AMaze"), &Z_Registration_Info_UClass_AMaze, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMaze), 2832174539U) },
+		{ Z_Construct_UClass_AMaze, AMaze::StaticClass, TEXT("AMaze"), &Z_Registration_Info_UClass_AMaze, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMaze), 1331149252U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_3907734179(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_927919786(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

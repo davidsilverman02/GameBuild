@@ -1,8 +1,12 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ShootyArenaProjectile.h"
+#include "ShootyArenaCharacter.h"
+#include "StatisticComponent.h"
+#include "Actions/PawnActionsComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+
 
 AShootyArenaProjectile::AShootyArenaProjectile() 
 {
@@ -36,8 +40,16 @@ void AShootyArenaProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherAc
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
-		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+		if(OtherActor != Instigator)
+		{
+			OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 
-		Destroy();
+			if(OtherActor->FindComponentByClass<UStatisticComponent>())
+			{
+				Instigator->FindComponentByClass<UStatisticComponent>()->AddPoints(1);
+			}
+
+			Destroy();
+		}
 	}
 }
