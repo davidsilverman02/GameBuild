@@ -16,8 +16,10 @@ class AShootyArenaCharacter;
 
 #define FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_SPARSE_DATA
 #define FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_RPC_WRAPPERS \
+	virtual void ClientShoot_Implementation(); \
  \
 	DECLARE_FUNCTION(execReferCom); \
+	DECLARE_FUNCTION(execClientShoot); \
 	DECLARE_FUNCTION(execEndPlay); \
 	DECLARE_FUNCTION(execGetChar); \
 	DECLARE_FUNCTION(execFire); \
@@ -25,14 +27,18 @@ class AShootyArenaCharacter;
 
 
 #define FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void ClientShoot_Implementation(); \
  \
 	DECLARE_FUNCTION(execReferCom); \
+	DECLARE_FUNCTION(execClientShoot); \
 	DECLARE_FUNCTION(execEndPlay); \
 	DECLARE_FUNCTION(execGetChar); \
 	DECLARE_FUNCTION(execFire); \
 	DECLARE_FUNCTION(execAttachWeapon);
 
 
+#define FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_EVENT_PARMS
+#define FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_CALLBACK_WRAPPERS
 #define FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUTP_WeaponComponent(); \
@@ -75,12 +81,16 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UTP_WeaponComponent)
 
 
-#define FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_13_PROLOG
+#define FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_13_PROLOG \
+	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_EVENT_PARMS
+
+
 #define FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
 	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_SPARSE_DATA \
 	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_RPC_WRAPPERS \
+	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_CALLBACK_WRAPPERS \
 	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_INCLASS \
 	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_STANDARD_CONSTRUCTORS \
 public: \
@@ -92,6 +102,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
 	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_SPARSE_DATA \
 	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_CALLBACK_WRAPPERS \
 	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_INCLASS_NO_PURE_DECLS \
 	FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_16_ENHANCED_CONSTRUCTORS \
 private: \

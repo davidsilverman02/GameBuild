@@ -13,10 +13,11 @@ void UActionBase::Initialize(UActionComponent* NewActionComp)
 
 bool UActionBase::CanStart_Implementation(AActor* Instigator)
 {
-	if (IsRunning())
-	{
-		return false;
-	}
+	// if (IsRunning())
+	// {
+	// 	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Running");
+	// 	return false;
+	// }
 
 	UActionComponent* Comp = GetOwningComponent();
 	

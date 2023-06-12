@@ -337,7 +337,7 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FActionRepData>()
 		{ "ModuleRelativePath", "ActionBase.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UActionBase_StartAction_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UActionBase, nullptr, "StartAction", nullptr, nullptr, sizeof(ActionBase_eventStartAction_Parms), Z_Construct_UFunction_UActionBase_StartAction_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UActionBase_StartAction_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020C00, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UActionBase_StartAction_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UActionBase_StartAction_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UActionBase_StartAction_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UActionBase, nullptr, "StartAction", nullptr, nullptr, sizeof(ActionBase_eventStartAction_Parms), Z_Construct_UFunction_UActionBase_StartAction_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UActionBase_StartAction_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00220CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UActionBase_StartAction_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UActionBase_StartAction_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UActionBase_StartAction()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -366,7 +366,7 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FActionRepData>()
 		{ "ModuleRelativePath", "ActionBase.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UActionBase_StopAction_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UActionBase, nullptr, "StopAction", nullptr, nullptr, sizeof(ActionBase_eventStopAction_Parms), Z_Construct_UFunction_UActionBase_StopAction_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UActionBase_StopAction_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x0C020C00, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UActionBase_StopAction_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UActionBase_StopAction_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UActionBase_StopAction_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UActionBase, nullptr, "StopAction", nullptr, nullptr, sizeof(ActionBase_eventStopAction_Parms), Z_Construct_UFunction_UActionBase_StopAction_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UActionBase_StopAction_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00220CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UActionBase_StopAction_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UActionBase_StopAction_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_UActionBase_StopAction()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -434,8 +434,8 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FActionRepData>()
 		{ &Z_Construct_UFunction_UActionBase_GetOwningComponent, "GetOwningComponent" }, // 1394791325
 		{ &Z_Construct_UFunction_UActionBase_IsRunning, "IsRunning" }, // 4279611326
 		{ &Z_Construct_UFunction_UActionBase_OnRep_RepData, "OnRep_RepData" }, // 1905433067
-		{ &Z_Construct_UFunction_UActionBase_StartAction, "StartAction" }, // 265051239
-		{ &Z_Construct_UFunction_UActionBase_StopAction, "StopAction" }, // 1232056731
+		{ &Z_Construct_UFunction_UActionBase_StartAction, "StartAction" }, // 3094231468
+		{ &Z_Construct_UFunction_UActionBase_StopAction, "StopAction" }, // 2369168896
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UActionBase_Statics::Class_MetaDataParams[] = {
@@ -455,11 +455,12 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FActionRepData>()
 	const UECodeGen_Private::FSoftObjectPropertyParams Z_Construct_UClass_UActionBase_Statics::NewProp_Icon = { "Icon", nullptr, (EPropertyFlags)0x0024080000010015, UECodeGen_Private::EPropertyGenFlags::SoftObject, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UActionBase, Icon), Z_Construct_UClass_UTexture2D_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UActionBase_Statics::NewProp_Icon_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UActionBase_Statics::NewProp_Icon_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UActionBase_Statics::NewProp_ActionComp_MetaData[] = {
+		{ "Category", "ActionBase" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "ActionBase.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPtrPropertyParams Z_Construct_UClass_UActionBase_Statics::NewProp_ActionComp = { "ActionComp", nullptr, (EPropertyFlags)0x0024080000080028, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UActionBase, ActionComp), Z_Construct_UClass_UActionComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UActionBase_Statics::NewProp_ActionComp_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UActionBase_Statics::NewProp_ActionComp_MetaData)) };
+	const UECodeGen_Private::FObjectPtrPropertyParams Z_Construct_UClass_UActionBase_Statics::NewProp_ActionComp = { "ActionComp", nullptr, (EPropertyFlags)0x00240800000a0029, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UActionBase, ActionComp), Z_Construct_UClass_UActionComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UActionBase_Statics::NewProp_ActionComp_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UActionBase_Statics::NewProp_ActionComp_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UActionBase_Statics::NewProp_GrantsTags_MetaData[] = {
 		{ "Category", "Tags" },
@@ -576,9 +577,9 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FActionRepData>()
 		{ FActionRepData::StaticStruct, Z_Construct_UScriptStruct_FActionRepData_Statics::NewStructOps, TEXT("ActionRepData"), &Z_Registration_Info_UScriptStruct_ActionRepData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FActionRepData), 2455282389U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionBase_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UActionBase, UActionBase::StaticClass, TEXT("UActionBase"), &Z_Registration_Info_UClass_UActionBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UActionBase), 4093569264U) },
+		{ Z_Construct_UClass_UActionBase, UActionBase::StaticClass, TEXT("UActionBase"), &Z_Registration_Info_UClass_UActionBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UActionBase), 1024827765U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionBase_h_2439430335(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionBase_h_2991148442(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionBase_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionBase_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionBase_h_Statics::ScriptStructInfo),
 		nullptr, 0);

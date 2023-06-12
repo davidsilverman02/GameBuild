@@ -29,6 +29,13 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 		P_THIS->ReferCom();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UTP_WeaponComponent::execClientShoot)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ClientShoot_Implementation();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UTP_WeaponComponent::execEndPlay)
 	{
 		P_GET_PROPERTY(FByteProperty,Z_Param_EndPlayReason);
@@ -59,11 +66,17 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 		P_THIS->AttachWeapon(Z_Param_TargetCharacter);
 		P_NATIVE_END;
 	}
+	static FName NAME_UTP_WeaponComponent_ClientShoot = FName(TEXT("ClientShoot"));
+	void UTP_WeaponComponent::ClientShoot()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_UTP_WeaponComponent_ClientShoot),NULL);
+	}
 	void UTP_WeaponComponent::StaticRegisterNativesUTP_WeaponComponent()
 	{
 		UClass* Class = UTP_WeaponComponent::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "AttachWeapon", &UTP_WeaponComponent::execAttachWeapon },
+			{ "ClientShoot", &UTP_WeaponComponent::execClientShoot },
 			{ "EndPlay", &UTP_WeaponComponent::execEndPlay },
 			{ "Fire", &UTP_WeaponComponent::execFire },
 			{ "GetChar", &UTP_WeaponComponent::execGetChar },
@@ -103,6 +116,28 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UTP_WeaponComponent_AttachWeapon_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UTP_WeaponComponent_ClientShoot_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UTP_WeaponComponent_ClientShoot_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "TP_WeaponComponent.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UTP_WeaponComponent_ClientShoot_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UTP_WeaponComponent, nullptr, "ClientShoot", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00280CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UTP_WeaponComponent_ClientShoot_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UTP_WeaponComponent_ClientShoot_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UTP_WeaponComponent_ClientShoot()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UTP_WeaponComponent_ClientShoot_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -270,6 +305,7 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UTP_WeaponComponent_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UTP_WeaponComponent_AttachWeapon, "AttachWeapon" }, // 2683251081
+		{ &Z_Construct_UFunction_UTP_WeaponComponent_ClientShoot, "ClientShoot" }, // 2250482567
 		{ &Z_Construct_UFunction_UTP_WeaponComponent_EndPlay, "EndPlay" }, // 1634024272
 		{ &Z_Construct_UFunction_UTP_WeaponComponent_Fire, "Fire" }, // 3781507124
 		{ &Z_Construct_UFunction_UTP_WeaponComponent_GetChar, "GetChar" }, // 3188441144
@@ -372,9 +408,9 @@ void EmptyLinkFunctionForGeneratedCodeTP_WeaponComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UTP_WeaponComponent, UTP_WeaponComponent::StaticClass, TEXT("UTP_WeaponComponent"), &Z_Registration_Info_UClass_UTP_WeaponComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UTP_WeaponComponent), 434041799U) },
+		{ Z_Construct_UClass_UTP_WeaponComponent, UTP_WeaponComponent::StaticClass, TEXT("UTP_WeaponComponent"), &Z_Registration_Info_UClass_UTP_WeaponComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UTP_WeaponComponent), 3911462910U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_1697728888(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_3614389365(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_TP_WeaponComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

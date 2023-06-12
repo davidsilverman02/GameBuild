@@ -12,6 +12,7 @@ class USceneComponent;
 class UCameraComponent;
 class UAnimMontage;
 class USoundBase;
+class UActionComponent;
 
 // Declaration of the delegate that will be called when the Primary Action is triggered
 // It is declared as dynamic so it can be accessed also in Blueprints
@@ -30,6 +31,9 @@ class AShootyArenaCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FirstPersonCameraComponent;
 
+	UPROPERTY(EditAnywhere, Category=Gameplay)
+	UActionComponent* Actions;
+
 public:
 	AShootyArenaCharacter();
 
@@ -38,6 +42,12 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float JumpSpeed;
+
+	UFUNCTION(BlueprintCallable)
+	FRotator GetRota();
+
+	UFUNCTION(BlueprintCallable)
+	FVector GetMuzzle();
 public:
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -105,5 +115,13 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
+	FVector MuzzleOffset;
+
+	UPROPERTY(EditDefaultsOnly, Category=Projectile)
+	TSubclassOf<class AShootyArenaProjectile> ProjectileClass;
+
+	UFUNCTION(Reliable, Server)
+	void Shoot();
 };
 

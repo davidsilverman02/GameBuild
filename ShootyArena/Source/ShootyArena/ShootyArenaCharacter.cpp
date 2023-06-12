@@ -7,7 +7,10 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/InputSettings.h"
+#include "ActionComponent.h"
+#include "Kismet/GameplayStatics.h"
 
+class UActionComponent;
 
 //////////////////////////////////////////////////////////////////////////
 // AShootyArenaCharacter
@@ -34,6 +37,10 @@ AShootyArenaCharacter::AShootyArenaCharacter()
 	Mesh1P->CastShadow = false;
 	Mesh1P->SetRelativeRotation(FRotator(1.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-0.5f, -4.4f, -155.7f));
+
+	Actions = CreateDefaultSubobject<UActionComponent>(TEXT("ActionComp"));
+
+	MuzzleOffset = FVector(100.0f, 0.0f, 10.0f);
 
 }
 
@@ -76,8 +83,17 @@ void AShootyArenaCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 
 void AShootyArenaCharacter::OnPrimaryAction()
 {
-	// Trigger the OnItemUsed Event
-	OnUseItem.Broadcast();
+	 Shoot();
+	
+	 
+	// if (FireSound != nullptr)
+	// {
+	// 	UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
+	// }
+
+	//Actions->RotPos = GetRota();
+	//Actions->ShootPos = GetMuzzle();
+	//Actions->StartActionByName(this, "Shoot");
 }
 
 void AShootyArenaCharacter::BeginTouch(const ETouchIndex::Type FingerIndex, const FVector Location)
@@ -152,3 +168,38 @@ bool AShootyArenaCharacter::EnableTouchscreenMovement(class UInputComponent* Pla
 	
 	return false;
 }
+
+FRotator AShootyArenaCharacter::GetRota()
+{
+	return Cast<APlayerController>(GetController())->PlayerCameraManager->GetCameraRotation();
+}
+
+FVector AShootyArenaCharacter::GetMuzzle()
+{
+	return GetActorLocation() + GetRota().RotateVector(MuzzleOffset);
+}
+
+void AShootyArenaCharacter::Shoot_Implementation()
+{
+	if (ProjectileClass != nullptr)
+	{
+		UWorld* const World = GetWorld();
+		if (World != nullptr)
+		{
+			APlayerController* PlayerController = Cast<APlayerController>(GetController());
+			const FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();
+			// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
+			const FVector SpawnLocation = GetActorLocation() + SpawnRotation.RotateVector(MuzzleOffset);
+	
+			//Set Spawn Collision Handling Override
+			FActorSpawnParameters ActorSpawnParams;
+			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+	
+			// Spawn the projectile at the muzzle
+			World->SpawnActor<AShootyArenaProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+		}
+	}
+}
+
+
+

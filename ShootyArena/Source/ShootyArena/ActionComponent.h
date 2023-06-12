@@ -72,5 +72,9 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UPROPERTY(EditAnywhere)
-	AActor* IgnoredItem;
+	APawn* Instigation;
+
+	FRotator RotPos;
+
+	FVector ShootPos;
 };

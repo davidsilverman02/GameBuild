@@ -18,6 +18,7 @@ void EmptyLinkFunctionForGeneratedCodeActionComponent() {}
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	GAMEPLAYTAGS_API UScriptStruct* Z_Construct_UScriptStruct_FGameplayTagContainer();
+	ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
 // End Cross Module References
 	struct Z_Construct_UDelegateFunction_ShootyArena_OnActionStateChanged__DelegateSignature_Statics
 	{
@@ -452,9 +453,9 @@ void EmptyLinkFunctionForGeneratedCodeActionComponent() {}
 #endif
 		static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnActionStopped;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_IgnoredItem_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Instigation_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_IgnoredItem;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Instigation;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -518,12 +519,12 @@ void EmptyLinkFunctionForGeneratedCodeActionComponent() {}
 #endif
 	const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UActionComponent_Statics::NewProp_OnActionStopped = { "OnActionStopped", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UActionComponent, OnActionStopped), Z_Construct_UDelegateFunction_ShootyArena_OnActionStateChanged__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_UActionComponent_Statics::NewProp_OnActionStopped_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UActionComponent_Statics::NewProp_OnActionStopped_MetaData)) }; // 498861407
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UActionComponent_Statics::NewProp_IgnoredItem_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UActionComponent_Statics::NewProp_Instigation_MetaData[] = {
 		{ "Category", "ActionComponent" },
 		{ "ModuleRelativePath", "ActionComponent.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UActionComponent_Statics::NewProp_IgnoredItem = { "IgnoredItem", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UActionComponent, IgnoredItem), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UActionComponent_Statics::NewProp_IgnoredItem_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UActionComponent_Statics::NewProp_IgnoredItem_MetaData)) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UActionComponent_Statics::NewProp_Instigation = { "Instigation", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UActionComponent, Instigation), Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UActionComponent_Statics::NewProp_Instigation_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UActionComponent_Statics::NewProp_Instigation_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UActionComponent_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UActionComponent_Statics::NewProp_ActiveGameplayTags,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UActionComponent_Statics::NewProp_DefaultActions_Inner,
@@ -532,7 +533,7 @@ void EmptyLinkFunctionForGeneratedCodeActionComponent() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UActionComponent_Statics::NewProp_Actions,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UActionComponent_Statics::NewProp_OnActionStarted,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UActionComponent_Statics::NewProp_OnActionStopped,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UActionComponent_Statics::NewProp_IgnoredItem,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UActionComponent_Statics::NewProp_Instigation,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UActionComponent_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UActionComponent>::IsAbstract,
@@ -580,9 +581,9 @@ void EmptyLinkFunctionForGeneratedCodeActionComponent() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionComponent_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UActionComponent, UActionComponent::StaticClass, TEXT("UActionComponent"), &Z_Registration_Info_UClass_UActionComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UActionComponent), 1765638396U) },
+		{ Z_Construct_UClass_UActionComponent, UActionComponent::StaticClass, TEXT("UActionComponent"), &Z_Registration_Info_UClass_UActionComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UActionComponent), 2469012523U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionComponent_h_98158205(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionComponent_h_3889507828(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ActionComponent_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

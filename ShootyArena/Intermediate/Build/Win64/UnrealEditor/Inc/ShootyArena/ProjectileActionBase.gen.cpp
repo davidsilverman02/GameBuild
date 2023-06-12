@@ -14,12 +14,28 @@ void EmptyLinkFunctionForGeneratedCodeProjectileActionBase() {}
 	SHOOTYARENA_API UClass* Z_Construct_UClass_UActionBase();
 	UPackage* Z_Construct_UPackage__Script_ShootyArena();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter_NoRegister();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UParticleSystem_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USoundBase_NoRegister();
 // End Cross Module References
+	DEFINE_FUNCTION(UProjectileActionBase::execMuzzle)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(FVector*)Z_Param__Result=P_THIS->Muzzle();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UProjectileActionBase::execGetRot)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(FRotator*)Z_Param__Result=P_THIS->GetRot();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UProjectileActionBase::execAttackDelay_Elapsed)
 	{
 		P_GET_OBJECT(ACharacter,Z_Param_InstigatorCharacter);
@@ -33,6 +49,8 @@ void EmptyLinkFunctionForGeneratedCodeProjectileActionBase() {}
 		UClass* Class = UProjectileActionBase::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "AttackDelay_Elapsed", &UProjectileActionBase::execAttackDelay_Elapsed },
+			{ "GetRot", &UProjectileActionBase::execGetRot },
+			{ "Muzzle", &UProjectileActionBase::execMuzzle },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -65,6 +83,70 @@ void EmptyLinkFunctionForGeneratedCodeProjectileActionBase() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UProjectileActionBase_AttackDelay_Elapsed_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics
+	{
+		struct ProjectileActionBase_eventGetRot_Parms
+		{
+			FRotator ReturnValue;
+		};
+		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ProjectileActionBase_eventGetRot_Parms, ReturnValue), Z_Construct_UScriptStruct_FRotator, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "ProjectileActionBase.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UProjectileActionBase, nullptr, "GetRot", nullptr, nullptr, sizeof(Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::ProjectileActionBase_eventGetRot_Parms), Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04820401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UProjectileActionBase_GetRot()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UProjectileActionBase_GetRot_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics
+	{
+		struct ProjectileActionBase_eventMuzzle_Parms
+		{
+			FVector ReturnValue;
+		};
+		static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ProjectileActionBase_eventMuzzle_Parms, ReturnValue), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "ProjectileActionBase.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UProjectileActionBase, nullptr, "Muzzle", nullptr, nullptr, sizeof(Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::ProjectileActionBase_eventMuzzle_Parms), Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04820401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UProjectileActionBase_Muzzle()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UProjectileActionBase_Muzzle_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -122,6 +204,8 @@ void EmptyLinkFunctionForGeneratedCodeProjectileActionBase() {}
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UProjectileActionBase_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_UProjectileActionBase_AttackDelay_Elapsed, "AttackDelay_Elapsed" }, // 3319851225
+		{ &Z_Construct_UFunction_UProjectileActionBase_GetRot, "GetRot" }, // 1842956812
+		{ &Z_Construct_UFunction_UProjectileActionBase_Muzzle, "Muzzle" }, // 1390600213
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UProjectileActionBase_Statics::Class_MetaDataParams[] = {
@@ -240,9 +324,9 @@ void EmptyLinkFunctionForGeneratedCodeProjectileActionBase() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ProjectileActionBase_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UProjectileActionBase, UProjectileActionBase::StaticClass, TEXT("UProjectileActionBase"), &Z_Registration_Info_UClass_UProjectileActionBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProjectileActionBase), 1747743332U) },
+		{ Z_Construct_UClass_UProjectileActionBase, UProjectileActionBase::StaticClass, TEXT("UProjectileActionBase"), &Z_Registration_Info_UClass_UProjectileActionBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProjectileActionBase), 174290142U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ProjectileActionBase_h_3900416215(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ProjectileActionBase_h_3306707370(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ProjectileActionBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ProjectileActionBase_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

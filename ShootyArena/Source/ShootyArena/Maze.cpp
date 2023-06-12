@@ -60,7 +60,7 @@ void AMaze::PlaceNodes_Implementation()
 				{
 					RoomPos.Z = k * RoomSizeInUnits.Z;
 					SpawnTM = FTransform(BaseRot, RoomPos);
-					GetWorld()->SpawnActor<AActor>(RoomMake, RoomPos, BaseRot, SpawnParams);
+					//GetWorld()->SpawnActor<AActor>(RoomMake, RoomPos, BaseRot, SpawnParams);
 					//Adjacent.Add(GetWorld()->SpawnActor<UObject>(RoomMake, SpawnTM, SpawnParams));
 					Visit.Add(false);
 				}

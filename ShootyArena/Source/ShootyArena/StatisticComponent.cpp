@@ -23,12 +23,9 @@ void UStatisticComponent::BeginPlay()
 	
 }
 
-
-// Called every frame
-void UStatisticComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UStatisticComponent::AddPoints(int Doints)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
+	
 }
+
 

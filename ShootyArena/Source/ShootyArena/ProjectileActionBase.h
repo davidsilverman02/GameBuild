@@ -49,5 +49,11 @@ protected:
 public:
 	virtual void StartAction_Implementation(AActor* Instigator) override;
 
+	UFUNCTION(BlueprintCallable)
+	FRotator GetRot();
+
+	UFUNCTION(BlueprintCallable)
+	FVector Muzzle();
+
 	UProjectileActionBase();
 };

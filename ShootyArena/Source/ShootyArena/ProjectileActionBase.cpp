@@ -54,22 +54,33 @@ void UProjectileActionBase::AttackDelay_Elapsed(ACharacter* InstigatorCharacter)
 		UWorld* const World = GetWorld();
 		if (World != nullptr)
 		{
-			APlayerController* PlayerController = Cast<APlayerController>(InstigatorCharacter->GetController());
-			const FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();
+			const FRotator SpawnRotation = GetRot();
 			// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
-			const FVector SpawnLocation = InstigatorCharacter->GetMesh()->GetSocketLocation(HandSocketName);
+			const FVector SpawnLocation = Muzzle(); 
 	
 			//Set Spawn Collision Handling Override
 			FActorSpawnParameters ActorSpawnParams;
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
 			
-			if(GetOwningComponent()->IgnoredItem != nullptr)
-				ActorSpawnParams.Instigator = GetOwningComponent()->IgnoredItem();
+			if(ActionComp->Instigation != nullptr)
+				ActorSpawnParams.Instigator = GetOwningComponent()->Instigation;
 	
 			// Spawn the projectile at the muzzle
 			World->SpawnActor<AShootyArenaProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
 		}
 	}
 }
+
+FRotator UProjectileActionBase::GetRot()
+{
+	return ActionComp->RotPos;
+}
+
+FVector UProjectileActionBase::Muzzle()
+{
+	return ActionComp->ShootPos;
+}
+
+
 
 

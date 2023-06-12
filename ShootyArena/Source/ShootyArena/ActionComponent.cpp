@@ -178,6 +178,7 @@ bool UActionComponent::StopActionByName(AActor* Instigator, FName ActionName)
 
 void UActionComponent::ServerStartAction_Implementation(AActor* Instigator, FName ActionName)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Going" );
 	StartActionByName(Instigator, ActionName);
 }
 

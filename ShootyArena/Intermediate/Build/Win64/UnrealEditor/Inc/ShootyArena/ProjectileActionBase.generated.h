@@ -17,11 +17,15 @@ class ACharacter;
 #define FID_ShootyArena_Source_ShootyArena_ProjectileActionBase_h_15_SPARSE_DATA
 #define FID_ShootyArena_Source_ShootyArena_ProjectileActionBase_h_15_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execMuzzle); \
+	DECLARE_FUNCTION(execGetRot); \
 	DECLARE_FUNCTION(execAttackDelay_Elapsed);
 
 
 #define FID_ShootyArena_Source_ShootyArena_ProjectileActionBase_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execMuzzle); \
+	DECLARE_FUNCTION(execGetRot); \
 	DECLARE_FUNCTION(execAttackDelay_Elapsed);
 
 

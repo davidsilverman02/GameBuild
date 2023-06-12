@@ -37,7 +37,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "UI")
 	TSoftObjectPtr<UTexture2D> Icon;
 
-	UPROPERTY(Replicated)
+	UPROPERTY(VisibleAnywhere, Replicated)
 	TObjectPtr<UActionComponent> ActionComp;
 
 	UFUNCTION(BlueprintCallable, Category = "Action")
@@ -74,10 +74,10 @@ public:
 	UFUNCTION(BlueprintNativeEvent, Category = "Action")
 	bool CanStart(AActor* Instigator);
 
-	UFUNCTION(BlueprintNativeEvent, Category = "Action")
+	UFUNCTION(Server, Reliable, Category = "Action")
 	void StartAction(AActor* Instigator);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Action")
+	UFUNCTION(Server, Reliable, Category = "Action")
 	void StopAction(AActor* Instigator);
 
 	/* Action nickname to start/stop without a reference to the object */
