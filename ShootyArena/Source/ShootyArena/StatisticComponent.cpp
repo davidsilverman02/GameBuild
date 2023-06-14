@@ -3,6 +3,8 @@
 
 #include "StatisticComponent.h"
 
+#include "Net/UnrealNetwork.h"
+
 // Sets default values for this component's properties
 UStatisticComponent::UStatisticComponent()
 {
@@ -27,5 +29,15 @@ void UStatisticComponent::AddPoints(int Doints)
 {
 	
 }
+
+void UStatisticComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(UStatisticComponent, Points);
+}
+
+
+
 
 

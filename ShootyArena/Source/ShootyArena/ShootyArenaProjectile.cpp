@@ -43,9 +43,10 @@ void AShootyArenaProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherAc
 		if(OtherActor != Instigator)
 		{
 			OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
-
+			
 			if(OtherActor->FindComponentByClass<UStatisticComponent>())
 			{
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Your Message"));
 				Instigator->FindComponentByClass<UStatisticComponent>()->AddPoints(1);
 			}
 

@@ -26,5 +26,7 @@ protected:
 public:	
 	UFUNCTION(BlueprintCallable)
 	void AddPoints(int Doints);
+
+	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 };

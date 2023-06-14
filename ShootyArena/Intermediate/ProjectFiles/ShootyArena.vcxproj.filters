@@ -29,9 +29,63 @@
     <None Include="..\..\Config\DefaultInput.ini">
       <Filter>Config</Filter>
     </None>
+    <Filter Include="Config\HoloLens">
+      <UniqueIdentifier>{4C8DD267-CDE7-336F-8602-F5F485D22BAB}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\HoloLens\HoloLensEngine.ini">
+      <Filter>Config\HoloLens</Filter>
+    </None>
     <Filter Include="Source\ShootyArena">
       <UniqueIdentifier>{D035ADA0-D2EF-3485-BADF-D6FA36E68BF0}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\ShootyArena\ActionBase.cpp">
+      <Filter>Source\ShootyArena</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootyArena\ActionBase.h">
+      <Filter>Source\ShootyArena</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootyArena\ActionComponent.cpp">
+      <Filter>Source\ShootyArena</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootyArena\ActionComponent.h">
+      <Filter>Source\ShootyArena</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootyArena\GunActionComponent.cpp">
+      <Filter>Source\ShootyArena</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootyArena\GunActionComponent.h">
+      <Filter>Source\ShootyArena</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootyArena\Maze.cpp">
+      <Filter>Source\ShootyArena</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootyArena\Maze.h">
+      <Filter>Source\ShootyArena</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootyArena\MazeBox.cpp">
+      <Filter>Source\ShootyArena</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootyArena\MazeBox.h">
+      <Filter>Source\ShootyArena</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootyArena\MazeCube.cpp">
+      <Filter>Source\ShootyArena</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootyArena\MazeCube.h">
+      <Filter>Source\ShootyArena</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootyArena\MazeHolder.cpp">
+      <Filter>Source\ShootyArena</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootyArena\MazeHolder.h">
+      <Filter>Source\ShootyArena</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootyArena\ProjectileActionBase.cpp">
+      <Filter>Source\ShootyArena</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootyArena\ProjectileActionBase.h">
+      <Filter>Source\ShootyArena</Filter>
+    </ClInclude>
     <None Include="..\..\Source\ShootyArena\ShootyArena.Build.cs">
       <Filter>Source\ShootyArena</Filter>
     </None>
@@ -57,6 +111,12 @@
       <Filter>Source\ShootyArena</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\ShootyArena\ShootyArenaProjectile.h">
+      <Filter>Source\ShootyArena</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ShootyArena\StatisticComponent.cpp">
+      <Filter>Source\ShootyArena</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ShootyArena\StatisticComponent.h">
       <Filter>Source\ShootyArena</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\ShootyArena\TP_PickUpComponent.cpp">

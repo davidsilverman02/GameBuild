@@ -7,6 +7,9 @@
 #include "Maze.generated.h"
 
 class AMazeCube;
+class UMazeBox;
+class UInstancedStaticMeshComponent;
+class UBoxSerial;
 
 UCLASS()
 class SHOOTYARENA_API AMaze : public AActor
@@ -55,6 +58,15 @@ protected:
 	AMazeCube* RoomMake;
 
 	UPROPERTY(EditAnywhere)
+	UMazeBox* Box;
+
+	UPROPERTY(EditAnywhere, Instanced)
+	UMazeBox* Boz;
+
+	UPROPERTY(EditAnywhere, Category= "Boxes")
+	TArray<UMazeBox*> Boxes;
+	
+	UPROPERTY(EditAnywhere)
 	bool bHasStarted;
 
 	UPROPERTY(EditAnywhere)
@@ -92,6 +104,11 @@ protected:
 
 	FIntVector HuntPosit;
 
+	FObjectInstancingGraph Garafa;
+
+	UPROPERTY()
+	TSubclassOf<UMazeBox> Maza;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -122,4 +139,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void MakeClean(AMazeCube* Cube);
+
+	FName GetNae(FIntVector conve);
+
+	FIntVector VecNum;
 };

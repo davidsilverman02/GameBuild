@@ -1,0 +1,23 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\inc\\shootyarena\\mazebox.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\shootyarenaeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\development\\shootyarena\\definitions.shootyarena.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\source\\shootyarena\\mazebox.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\components\\instancedstaticmeshcomponent.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\public\\elements\\sminstance\\sminstancemanager.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\public\\elements\\sminstance\\sminstanceelementid.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\public\\instancedstaticmeshdelegates.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\sminstanceelementid.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\sminstancemanager.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\public\\primitiveinstanceupdatecommand.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\instancedstaticmeshcomponent.generated.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\inc\\shootyarena\\mazebox.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

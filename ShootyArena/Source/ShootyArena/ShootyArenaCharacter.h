@@ -13,6 +13,7 @@ class UCameraComponent;
 class UAnimMontage;
 class USoundBase;
 class UActionComponent;
+class UStatisticComponent;
 
 // Declaration of the delegate that will be called when the Primary Action is triggered
 // It is declared as dynamic so it can be accessed also in Blueprints
@@ -34,6 +35,9 @@ class AShootyArenaCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, Category=Gameplay)
 	UActionComponent* Actions;
 
+	UPROPERTY(EditAnywhere, Category=Gameplay)
+	UStatisticComponent* Puntas;
+
 public:
 	AShootyArenaCharacter();
 
@@ -48,6 +52,7 @@ protected:
 
 	UFUNCTION(BlueprintCallable)
 	FVector GetMuzzle();
+
 public:
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)

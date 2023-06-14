@@ -1,0 +1,15 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\inc\\shootyarena\\boxserial.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\shootyarenaeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\development\\shootyarena\\definitions.shootyarena.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\source\\shootyarena\\boxserial.h",
+            "c:\\users\\david.silverman\\source\\repos\\gamebuild\\shootyarena\\intermediate\\build\\win64\\unrealeditor\\inc\\shootyarena\\boxserial.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

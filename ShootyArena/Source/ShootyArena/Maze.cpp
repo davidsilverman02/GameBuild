@@ -3,18 +3,35 @@
 
 #include "Maze.h"
 
+#include "MazeBox.h"
 #include "MazeCube.h"
+#include "Components/InstancedStaticMeshComponent.h"
 
 // Sets default values
 AMaze::AMaze()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	halfWidth = 4;
-	halfDepth = 4;
-	halfHeight = 4;
+	halfWidth = 1;
+	halfDepth = 1;
+	halfHeight = 1;
 	RoomSizeInUnits = FVector3f(800, 800, 800);
 	//SpawnParams.Instigator = this;
+
+	Garafa.EnableSubobjectInstancing(true);
+
+	//Box = CreateDefaultSubobject<UMazeBox>("Sbun");
+	//Box->RegisterComponent();
+	//Boxes.Add(Box);
+	// Box = CreateDefaultSubobject<UMazeBox>("Slun");
+	// Box->RegisterComponent();
+	// Boxes.Add(Box);
+	// Box = CreateDefaultSubobject<UMazeBox>("Shun");
+	// Box->RegisterComponent();
+	// Boxes.Add(Box);
+	// Boxes[1]->SetDown(false);
+	
+	//PlaceNodes();
 }
 
 // Called when the game starts or when spawned
@@ -48,22 +65,30 @@ int AMaze::width()
 
 void AMaze::PlaceNodes_Implementation()
 {
-	if(ensureAlways(RoomMake))
+	for(UMazeBox* bos : Boxes)
 	{
-		for (int i = -halfWidth; i <= halfWidth; i++)
+		bos->DestroyComponent();
+	}
+
+	Boxes.Empty();
+	
+	for (int i = -halfWidth; i <= halfWidth; i++)
+	{
+		RoomPos.X = i * RoomSizeInUnits.X;
+		for(int j = -halfDepth; j <= halfDepth; j++)
 		{
-			RoomPos.X = i * RoomSizeInUnits.X;
-			for(int j = -halfDepth; j <= halfDepth; j++)
+			RoomPos.Y = j * RoomSizeInUnits.Y;
+			for (int k = -halfHeight; k <= halfHeight; k++)
 			{
-				RoomPos.Y = j * RoomSizeInUnits.Y;
-				for (int k = -halfHeight; k <= halfHeight; k++)
-				{
-					RoomPos.Z = k * RoomSizeInUnits.Z;
-					SpawnTM = FTransform(BaseRot, RoomPos);
-					//GetWorld()->SpawnActor<AActor>(RoomMake, RoomPos, BaseRot, SpawnParams);
-					//Adjacent.Add(GetWorld()->SpawnActor<UObject>(RoomMake, SpawnTM, SpawnParams));
-					Visit.Add(false);
-				}
+				RoomPos.Z = k * RoomSizeInUnits.Z;
+				
+				VecNum = FIntVector(i, j, k);
+				
+				auto Bing = NewObject<UMazeBox>(this,GetNae(VecNum), RF_NoFlags, Maza.GetDefaultObject());
+				Bing->RegisterComponent();
+				Bing->SetRelativeLocation(RoomPos);
+				Bing->SetNode(VecNum);
+				Boxes.Add(Bing);
 			}
 		}
 	}
@@ -285,6 +310,12 @@ void AMaze::MakeClean_Implementation(AMazeCube* Cube)
 		ClearToFrom(Cube->GetNode(), Cube->UpPoint());
 	}
 }
+
+FName AMaze::GetNae(FIntVector conve)
+{
+	return "Cube:" + conve.X + ':' + conve.Y + ':' + conve.Z;
+}
+
 
 
 

@@ -19,6 +19,7 @@ void EmptyLinkFunctionForGeneratedCodeShootyArenaCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	SHOOTYARENA_API UClass* Z_Construct_UClass_UActionComponent_NoRegister();
+	SHOOTYARENA_API UClass* Z_Construct_UClass_UStatisticComponent_NoRegister();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	SHOOTYARENA_API UClass* Z_Construct_UClass_AShootyArenaProjectile_NoRegister();
 // End Cross Module References
@@ -193,6 +194,10 @@ void EmptyLinkFunctionForGeneratedCodeShootyArenaCharacter() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_Actions;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Puntas_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Puntas;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_JumpSpeed_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_JumpSpeed;
@@ -262,6 +267,14 @@ void EmptyLinkFunctionForGeneratedCodeShootyArenaCharacter() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Actions = { "Actions", nullptr, (EPropertyFlags)0x0040000000080009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AShootyArenaCharacter, Actions), Z_Construct_UClass_UActionComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Actions_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Actions_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Puntas_MetaData[] = {
+		{ "Category", "Gameplay" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "ShootyArenaCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Puntas = { "Puntas", nullptr, (EPropertyFlags)0x0040000000080009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AShootyArenaCharacter, Puntas), Z_Construct_UClass_UStatisticComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Puntas_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Puntas_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_JumpSpeed_MetaData[] = {
 		{ "Category", "ShootyArenaCharacter" },
 		{ "ModuleRelativePath", "ShootyArenaCharacter.h" },
@@ -304,6 +317,7 @@ void EmptyLinkFunctionForGeneratedCodeShootyArenaCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Mesh1P,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_FirstPersonCameraComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Actions,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_Puntas,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_JumpSpeed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_TurnRateGamepad,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShootyArenaCharacter_Statics::NewProp_OnUseItem,
@@ -346,9 +360,9 @@ void EmptyLinkFunctionForGeneratedCodeShootyArenaCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ShootyArenaCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AShootyArenaCharacter, AShootyArenaCharacter::StaticClass, TEXT("AShootyArenaCharacter"), &Z_Registration_Info_UClass_AShootyArenaCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AShootyArenaCharacter), 302333863U) },
+		{ Z_Construct_UClass_AShootyArenaCharacter, AShootyArenaCharacter::StaticClass, TEXT("AShootyArenaCharacter"), &Z_Registration_Info_UClass_AShootyArenaCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AShootyArenaCharacter), 2573341663U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ShootyArenaCharacter_h_599880178(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ShootyArenaCharacter_h_388885483(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ShootyArenaCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ShootyArenaCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
