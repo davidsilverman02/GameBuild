@@ -9,16 +9,201 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeMaze() {}
 // Cross Module References
+	SHOOTYARENA_API UScriptStruct* Z_Construct_UScriptStruct_FNoden();
+	UPackage* Z_Construct_UPackage__Script_ShootyArena();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FIntVector();
 	SHOOTYARENA_API UClass* Z_Construct_UClass_AMaze_NoRegister();
 	SHOOTYARENA_API UClass* Z_Construct_UClass_AMaze();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
-	UPackage* Z_Construct_UPackage__Script_ShootyArena();
-	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FIntVector();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	SHOOTYARENA_API UClass* Z_Construct_UClass_AMazeCube_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector3f();
-	SHOOTYARENA_API UClass* Z_Construct_UClass_UMazeBox_NoRegister();
-	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+	ENGINE_API UClass* Z_Construct_UClass_UInstancedStaticMeshComponent_NoRegister();
 // End Cross Module References
+	static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_Noden;
+class UScriptStruct* FNoden::StaticStruct()
+{
+	if (!Z_Registration_Info_UScriptStruct_Noden.OuterSingleton)
+	{
+		Z_Registration_Info_UScriptStruct_Noden.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FNoden, Z_Construct_UPackage__Script_ShootyArena(), TEXT("Noden"));
+	}
+	return Z_Registration_Info_UScriptStruct_Noden.OuterSingleton;
+}
+template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FNoden>()
+{
+	return FNoden::StaticStruct();
+}
+	struct Z_Construct_UScriptStruct_FNoden_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[];
+#endif
+		static void* NewStructOps();
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bUp_MetaData[];
+#endif
+		static void NewProp_bUp_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bUp;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bDown_MetaData[];
+#endif
+		static void NewProp_bDown_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bDown;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bNorth_MetaData[];
+#endif
+		static void NewProp_bNorth_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bNorth;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bSouth_MetaData[];
+#endif
+		static void NewProp_bSouth_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bSouth;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bWest_MetaData[];
+#endif
+		static void NewProp_bWest_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bWest;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bEast_MetaData[];
+#endif
+		static void NewProp_bEast_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bEast;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_NodePos_MetaData[];
+#endif
+		static const UECodeGen_Private::FStructPropertyParams NewProp_NodePos;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+		static const UECodeGen_Private::FStructParams ReturnStructParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNoden_Statics::Struct_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	void* Z_Construct_UScriptStruct_FNoden_Statics::NewStructOps()
+	{
+		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FNoden>();
+	}
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bUp_MetaData[] = {
+		{ "Category", "Noden" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	void Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bUp_SetBit(void* Obj)
+	{
+		((FNoden*)Obj)->bUp = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bUp = { "bUp", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(FNoden), &Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bUp_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bUp_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bUp_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bDown_MetaData[] = {
+		{ "Category", "Noden" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	void Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bDown_SetBit(void* Obj)
+	{
+		((FNoden*)Obj)->bDown = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bDown = { "bDown", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(FNoden), &Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bDown_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bDown_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bDown_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bNorth_MetaData[] = {
+		{ "Category", "Noden" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	void Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bNorth_SetBit(void* Obj)
+	{
+		((FNoden*)Obj)->bNorth = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bNorth = { "bNorth", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(FNoden), &Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bNorth_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bNorth_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bNorth_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bSouth_MetaData[] = {
+		{ "Category", "Noden" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	void Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bSouth_SetBit(void* Obj)
+	{
+		((FNoden*)Obj)->bSouth = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bSouth = { "bSouth", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(FNoden), &Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bSouth_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bSouth_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bSouth_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bWest_MetaData[] = {
+		{ "Category", "Noden" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	void Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bWest_SetBit(void* Obj)
+	{
+		((FNoden*)Obj)->bWest = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bWest = { "bWest", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(FNoden), &Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bWest_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bWest_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bWest_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bEast_MetaData[] = {
+		{ "Category", "Noden" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	void Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bEast_SetBit(void* Obj)
+	{
+		((FNoden*)Obj)->bEast = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bEast = { "bEast", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(FNoden), &Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bEast_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bEast_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bEast_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNoden_Statics::NewProp_NodePos_MetaData[] = {
+		{ "Category", "Noden" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FNoden_Statics::NewProp_NodePos = { "NodePos", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FNoden, NodePos), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_NodePos_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FNoden_Statics::NewProp_NodePos_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FNoden_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bUp,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bDown,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bNorth,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bSouth,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bWest,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNoden_Statics::NewProp_bEast,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNoden_Statics::NewProp_NodePos,
+	};
+	const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FNoden_Statics::ReturnStructParams = {
+		(UObject* (*)())Z_Construct_UPackage__Script_ShootyArena,
+		nullptr,
+		&NewStructOps,
+		"Noden",
+		sizeof(FNoden),
+		alignof(FNoden),
+		Z_Construct_UScriptStruct_FNoden_Statics::PropPointers,
+		UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FNoden_Statics::PropPointers),
+		RF_Public|RF_Transient|RF_MarkAsNative,
+		EStructFlags(0x00000001),
+		METADATA_PARAMS(Z_Construct_UScriptStruct_FNoden_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FNoden_Statics::Struct_MetaDataParams))
+	};
+	UScriptStruct* Z_Construct_UScriptStruct_FNoden()
+	{
+		if (!Z_Registration_Info_UScriptStruct_Noden.InnerSingleton)
+		{
+			UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_Noden.InnerSingleton, Z_Construct_UScriptStruct_FNoden_Statics::ReturnStructParams);
+		}
+		return Z_Registration_Info_UScriptStruct_Noden.InnerSingleton;
+	}
+	DEFINE_FUNCTION(AMaze::execExpandRooms)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ExpandRooms_Implementation();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMaze::execBuildRoom)
+	{
+		P_GET_STRUCT(FVector,Z_Param_vec);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->BuildRoom_Implementation(Z_Param_vec);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMaze::execMakeClean)
 	{
 		P_GET_OBJECT(AMazeCube,Z_Param_Cube);
@@ -115,6 +300,13 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 	{
 		ProcessEvent(FindFunctionChecked(NAME_AMaze_BuildMaze),NULL);
 	}
+	static FName NAME_AMaze_BuildRoom = FName(TEXT("BuildRoom"));
+	void AMaze::BuildRoom(FVector vec)
+	{
+		Maze_eventBuildRoom_Parms Parms;
+		Parms.vec=vec;
+		ProcessEvent(FindFunctionChecked(NAME_AMaze_BuildRoom),&Parms);
+	}
 	static FName NAME_AMaze_ClearToFrom = FName(TEXT("ClearToFrom"));
 	void AMaze::ClearToFrom(FIntVector to, FIntVector from)
 	{
@@ -122,6 +314,11 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 		Parms.to=to;
 		Parms.from=from;
 		ProcessEvent(FindFunctionChecked(NAME_AMaze_ClearToFrom),&Parms);
+	}
+	static FName NAME_AMaze_ExpandRooms = FName(TEXT("ExpandRooms"));
+	void AMaze::ExpandRooms()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_AMaze_ExpandRooms),NULL);
 	}
 	static FName NAME_AMaze_GetHunt = FName(TEXT("GetHunt"));
 	void AMaze::GetHunt(FIntVector pont)
@@ -166,8 +363,10 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 		UClass* Class = AMaze::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "BuildMaze", &AMaze::execBuildMaze },
+			{ "BuildRoom", &AMaze::execBuildRoom },
 			{ "ClearToFrom", &AMaze::execClearToFrom },
 			{ "depth", &AMaze::execdepth },
+			{ "ExpandRooms", &AMaze::execExpandRooms },
 			{ "GetHunt", &AMaze::execGetHunt },
 			{ "height", &AMaze::execheight },
 			{ "Hunt", &AMaze::execHunt },
@@ -199,6 +398,34 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMaze_BuildMaze_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMaze_BuildRoom_Statics
+	{
+		static const UECodeGen_Private::FStructPropertyParams NewProp_vec;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMaze_BuildRoom_Statics::NewProp_vec = { "vec", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Maze_eventBuildRoom_Parms, vec), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMaze_BuildRoom_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMaze_BuildRoom_Statics::NewProp_vec,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMaze_BuildRoom_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMaze_BuildRoom_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMaze, nullptr, "BuildRoom", nullptr, nullptr, sizeof(Maze_eventBuildRoom_Parms), Z_Construct_UFunction_AMaze_BuildRoom_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMaze_BuildRoom_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04A20CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMaze_BuildRoom_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMaze_BuildRoom_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMaze_BuildRoom()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMaze_BuildRoom_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -262,6 +489,28 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMaze_depth_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMaze_ExpandRooms_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMaze_ExpandRooms_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMaze_ExpandRooms_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMaze, nullptr, "ExpandRooms", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04220CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMaze_ExpandRooms_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMaze_ExpandRooms_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMaze_ExpandRooms()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMaze_ExpandRooms_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -549,39 +798,34 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_RoomSizeInUnits_MetaData[];
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_RoomSizeInUnits;
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_NodeItems_Inner;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_NodeItems_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_flatPart_MetaData[];
 #endif
-		static const UECodeGen_Private::FArrayPropertyParams NewProp_NodeItems;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_flatPart;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_thinPart_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_thinPart;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DistS_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_DistS;
 		static const UECodeGen_Private::FStructPropertyParams NewProp_Adjacent_Inner;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Adjacent_MetaData[];
 #endif
 		static const UECodeGen_Private::FArrayPropertyParams NewProp_Adjacent;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_NodeData_Inner;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_NodeData_MetaData[];
+#endif
+		static const UECodeGen_Private::FArrayPropertyParams NewProp_NodeData;
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_Visit_ValueProp;
 		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_Visit_Key_KeyProp;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Visit_MetaData[];
 #endif
 		static const UECodeGen_Private::FMapPropertyParams NewProp_Visit;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_RoomMake_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_RoomMake;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_Box_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_Box;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_Boz_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_Boz;
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_Boxes_Inner;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_Boxes_MetaData[];
-#endif
-		static const UECodeGen_Private::FArrayPropertyParams NewProp_Boxes;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_bHasStarted_MetaData[];
 #endif
@@ -620,9 +864,29 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_Stack;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_Maza_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_UpWalls_MetaData[];
 #endif
-		static const UECodeGen_Private::FClassPropertyParams NewProp_Maza;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_UpWalls;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DownWalls_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_DownWalls;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_NorthWalls_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_NorthWalls;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_SouthWalls_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_SouthWalls;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_EastWalls_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_EastWalls;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_WestWalls_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_WestWalls;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -633,8 +897,10 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMaze_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AMaze_BuildMaze, "BuildMaze" }, // 2057390350
+		{ &Z_Construct_UFunction_AMaze_BuildRoom, "BuildRoom" }, // 786793426
 		{ &Z_Construct_UFunction_AMaze_ClearToFrom, "ClearToFrom" }, // 2547296019
 		{ &Z_Construct_UFunction_AMaze_depth, "depth" }, // 3136817699
+		{ &Z_Construct_UFunction_AMaze_ExpandRooms, "ExpandRooms" }, // 3079951362
 		{ &Z_Construct_UFunction_AMaze_GetHunt, "GetHunt" }, // 687775430
 		{ &Z_Construct_UFunction_AMaze_height, "height" }, // 3375412474
 		{ &Z_Construct_UFunction_AMaze_Hunt, "Hunt" }, // 3303200691
@@ -679,14 +945,27 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_RoomSizeInUnits = { "RoomSizeInUnits", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, RoomSizeInUnits), Z_Construct_UScriptStruct_FVector3f, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_RoomSizeInUnits_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_RoomSizeInUnits_MetaData)) };
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_NodeItems_Inner = { "NodeItems", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_AMazeCube_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_NodeItems_MetaData[] = {
-		{ "Category", "Maze" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_flatPart_MetaData[] = {
+		{ "Category", "Stats" },
 		{ "ModuleRelativePath", "Maze.h" },
 	};
 #endif
-	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_NodeItems = { "NodeItems", nullptr, (EPropertyFlags)0x0020080000000004, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, NodeItems), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_NodeItems_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_NodeItems_MetaData)) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_flatPart = { "flatPart", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, flatPart), METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_flatPart_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_flatPart_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_thinPart_MetaData[] = {
+		{ "Category", "Stats" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_thinPart = { "thinPart", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, thinPart), METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_thinPart_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_thinPart_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_DistS_MetaData[] = {
+		{ "Category", "Stats" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_DistS = { "DistS", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, DistS), METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_DistS_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_DistS_MetaData)) };
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Adjacent_Inner = { "Adjacent", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_Adjacent_MetaData[] = {
@@ -695,6 +974,14 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 	};
 #endif
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Adjacent = { "Adjacent", nullptr, (EPropertyFlags)0x0020080000000004, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, Adjacent), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_Adjacent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_Adjacent_MetaData)) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_NodeData_Inner = { "NodeData", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FNoden, METADATA_PARAMS(nullptr, 0) }; // 3910870931
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_NodeData_MetaData[] = {
+		{ "Category", "Maze" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_NodeData = { "NodeData", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, NodeData), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_NodeData_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_NodeData_MetaData)) }; // 3910870931
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Visit_ValueProp = { "Visit", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), 0, nullptr, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Visit_Key_KeyProp = { "Visit_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
@@ -704,38 +991,6 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 	};
 #endif
 	const UECodeGen_Private::FMapPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Visit = { "Visit", nullptr, (EPropertyFlags)0x0020080000000004, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, Visit), EMapPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_Visit_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_Visit_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake_MetaData[] = {
-		{ "Category", "Maze" },
-		{ "ModuleRelativePath", "Maze.h" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake = { "RoomMake", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, RoomMake), Z_Construct_UClass_AMazeCube_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_Box_MetaData[] = {
-		{ "Category", "Maze" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Maze.h" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Box = { "Box", nullptr, (EPropertyFlags)0x0020080000080009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, Box), Z_Construct_UClass_UMazeBox_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_Box_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_Box_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_Boz_MetaData[] = {
-		{ "Category", "Maze" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Maze.h" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Boz = { "Boz", nullptr, (EPropertyFlags)0x0022080000080009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, Boz), Z_Construct_UClass_UMazeBox_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_Boz_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_Boz_MetaData)) };
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Boxes_Inner = { "Boxes", nullptr, (EPropertyFlags)0x0000000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_UMazeBox_NoRegister, METADATA_PARAMS(nullptr, 0) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_Boxes_MetaData[] = {
-		{ "Category", "Boxes" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Maze.h" },
-	};
-#endif
-	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Boxes = { "Boxes", nullptr, (EPropertyFlags)0x0020088000000009, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, Boxes), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_Boxes_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_Boxes_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_bHasStarted_MetaData[] = {
 		{ "Category", "Maze" },
@@ -813,28 +1068,68 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Stack = { "Stack", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, Stack), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_Stack_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_Stack_MetaData)) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_Maza_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_UpWalls_MetaData[] = {
+		{ "Category", "Maze" },
+		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Maze.h" },
 	};
 #endif
-	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_Maza = { "Maza", nullptr, (EPropertyFlags)0x0024080000000000, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, Maza), Z_Construct_UClass_UMazeBox_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_Maza_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_Maza_MetaData)) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_UpWalls = { "UpWalls", nullptr, (EPropertyFlags)0x002008000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, UpWalls), Z_Construct_UClass_UInstancedStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_UpWalls_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_UpWalls_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_DownWalls_MetaData[] = {
+		{ "Category", "Maze" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_DownWalls = { "DownWalls", nullptr, (EPropertyFlags)0x002008000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, DownWalls), Z_Construct_UClass_UInstancedStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_DownWalls_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_DownWalls_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_NorthWalls_MetaData[] = {
+		{ "Category", "Maze" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_NorthWalls = { "NorthWalls", nullptr, (EPropertyFlags)0x002008000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, NorthWalls), Z_Construct_UClass_UInstancedStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_NorthWalls_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_NorthWalls_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_SouthWalls_MetaData[] = {
+		{ "Category", "Maze" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_SouthWalls = { "SouthWalls", nullptr, (EPropertyFlags)0x002008000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, SouthWalls), Z_Construct_UClass_UInstancedStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_SouthWalls_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_SouthWalls_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_EastWalls_MetaData[] = {
+		{ "Category", "Maze" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_EastWalls = { "EastWalls", nullptr, (EPropertyFlags)0x002008000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, EastWalls), Z_Construct_UClass_UInstancedStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_EastWalls_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_EastWalls_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMaze_Statics::NewProp_WestWalls_MetaData[] = {
+		{ "Category", "Maze" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMaze_Statics::NewProp_WestWalls = { "WestWalls", nullptr, (EPropertyFlags)0x002008000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMaze, WestWalls), Z_Construct_UClass_UInstancedStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMaze_Statics::NewProp_WestWalls_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMaze_Statics::NewProp_WestWalls_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMaze_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_halfWidth,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_halfHeight,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_halfDepth,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_RoomSizeInUnits,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_NodeItems_Inner,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_NodeItems,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_flatPart,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_thinPart,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_DistS,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Adjacent_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Adjacent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_NodeData_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_NodeData,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Visit_ValueProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Visit_Key_KeyProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Visit,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_RoomMake,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Box,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Boz,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Boxes_Inner,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Boxes,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_bHasStarted,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_bRunning,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_bStartedHunt,
@@ -843,7 +1138,12 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_NumPos,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_UsdPos,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Stack,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_Maza,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_UpWalls,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_DownWalls,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_NorthWalls,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_SouthWalls,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_EastWalls,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMaze_Statics::NewProp_WestWalls,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AMaze_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AMaze>::IsAbstract,
@@ -878,13 +1178,17 @@ void EmptyLinkFunctionForGeneratedCodeMaze() {}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AMaze);
 	struct Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics
 	{
+		static const FStructRegisterCompiledInInfo ScriptStructInfo[];
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMaze, AMaze::StaticClass, TEXT("AMaze"), &Z_Registration_Info_UClass_AMaze, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMaze), 850125231U) },
+	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ScriptStructInfo[] = {
+		{ FNoden::StaticStruct, Z_Construct_UScriptStruct_FNoden_Statics::NewStructOps, TEXT("Noden"), &Z_Registration_Info_UScriptStruct_Noden, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FNoden), 3910870931U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_2740909986(TEXT("/Script/ShootyArena"),
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_AMaze, AMaze::StaticClass, TEXT("AMaze"), &Z_Registration_Info_UClass_AMaze, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMaze), 3984716118U) },
+	};
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_310854574(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ClassInfo),
-		nullptr, 0,
+		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ScriptStructInfo),
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

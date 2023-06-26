@@ -10,6 +10,94 @@ class AMazeCube;
 class UMazeBox;
 class UInstancedStaticMeshComponent;
 class UBoxSerial;
+class UBoxItem;
+
+USTRUCT(BlueprintType)
+struct FNoden
+{
+	GENERATED_BODY(IS_PROPERTY_REPLICATED)
+
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bUp;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bDown;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bNorth;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bSouth;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bWest;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bEast;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FIntVector NodePos;
+
+	FNoden()
+	{
+		bUp = true;
+		bDown = true;
+		bNorth = true;
+		bSouth = true;
+		bEast = true;
+		bWest = true;
+	}
+	
+	FNoden(FIntVector pos)
+	{
+		pos = NodePos;
+		bUp = true;
+		bDown = true;
+		bNorth = true;
+		bSouth = true;
+		bEast = true;
+		bWest = true;
+	}
+	
+	FIntVector UpPoint()
+	{
+		return FIntVector(NodePos.X, NodePos.Y, NodePos.Z + 1);
+	}
+	
+	FIntVector DownPoint()
+	{
+		return FIntVector(NodePos.X, NodePos.Y, NodePos.Z - 1);
+	}
+	
+	FIntVector NorthPoint()
+	{
+		return FIntVector(NodePos.X, NodePos.Y + 1, NodePos.Z);
+	}
+	
+	FIntVector SouthPoint()
+	{
+		return FIntVector(NodePos.X, NodePos.Y - 1, NodePos.Z);
+	}
+	
+	FIntVector EastPoint()
+	{
+		return FIntVector(NodePos.X + 1, NodePos.Y, NodePos.Z);
+	}
+	
+	FIntVector WestPoint()
+	{
+		return FIntVector(NodePos.X - 1, NodePos.Y, NodePos.Z);
+	}
+	
+	bool GetClog()
+	{
+		if((bNorth == false || bSouth == false) ^ (bEast == false || bWest == false) ^ (bUp == false || bDown == false))
+			return true;
+		else
+			return false;
+	}
+};
 
 UCLASS()
 class SHOOTYARENA_API AMaze : public AActor
@@ -45,26 +133,25 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Stats")
 	FVector3f RoomSizeInUnits;
 
-	UPROPERTY(BlueprintReadWrite)
-	TArray<AMazeCube*> NodeItems;
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	float flatPart;
+
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	float thinPart;
+
+	UPROPERTY(EditAnywhere, Category = "Stats")
+	float DistS;
+	
+	UStaticMesh* CubeMesh;
 
 	UPROPERTY(BlueprintReadWrite)
 	TArray<FIntVector> Adjacent;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<FNoden> NodeData;
+
 	UPROPERTY(BlueprintReadWrite)
 	TMap<int, bool> Visit;
-	
-	UPROPERTY(EditAnywhere)
-	AMazeCube* RoomMake;
-
-	UPROPERTY(EditAnywhere)
-	UMazeBox* Box;
-
-	UPROPERTY(EditAnywhere, Instanced)
-	UMazeBox* Boz;
-
-	UPROPERTY(EditAnywhere, Category= "Boxes")
-	TArray<UMazeBox*> Boxes;
 	
 	UPROPERTY(EditAnywhere)
 	bool bHasStarted;
@@ -104,11 +191,23 @@ protected:
 
 	FIntVector HuntPosit;
 
-	FObjectInstancingGraph Garafa;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInstancedStaticMeshComponent* UpWalls;
 
-	UPROPERTY()
-	TSubclassOf<UMazeBox> Maza;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInstancedStaticMeshComponent* DownWalls;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInstancedStaticMeshComponent* NorthWalls;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInstancedStaticMeshComponent* SouthWalls;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInstancedStaticMeshComponent* EastWalls;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInstancedStaticMeshComponent* WestWalls;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -140,7 +239,15 @@ public:
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void MakeClean(AMazeCube* Cube);
 
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void BuildRoom(FVector vec);
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void ExpandRooms();
+	
 	FName GetNae(FIntVector conve);
 
-	FIntVector VecNum;
+	FTransform Trils;
+
+	FVector VecNum;
 };

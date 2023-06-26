@@ -5,7 +5,9 @@
 
 #include "MazeBox.h"
 #include "MazeCube.h"
+#include "SAdvancedRotationInputBox.h"
 #include "Components/InstancedStaticMeshComponent.h"
+
 
 // Sets default values
 AMaze::AMaze()
@@ -16,22 +18,80 @@ AMaze::AMaze()
 	halfDepth = 1;
 	halfHeight = 1;
 	RoomSizeInUnits = FVector3f(800, 800, 800);
-	//SpawnParams.Instigator = this;
 
-	Garafa.EnableSubobjectInstancing(true);
-
-	//Box = CreateDefaultSubobject<UMazeBox>("Sbun");
-	//Box->RegisterComponent();
-	//Boxes.Add(Box);
-	// Box = CreateDefaultSubobject<UMazeBox>("Slun");
-	// Box->RegisterComponent();
-	// Boxes.Add(Box);
-	// Box = CreateDefaultSubobject<UMazeBox>("Shun");
-	// Box->RegisterComponent();
-	// Boxes.Add(Box);
-	// Boxes[1]->SetDown(false);
+	flatPart = 8.0f;
+	thinPart = 0.2f;
+	DistS = 390.0f;
+	CubeMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Cube.Cube'")).Object;
 	
-	//PlaceNodes();
+	
+	UpWalls = CreateDefaultSubobject<UInstancedStaticMeshComponent>("UpWalls");
+	UpWalls->SetMobility(EComponentMobility::Stationary);
+	UpWalls->SetStaticMesh(CubeMesh);
+	UpWalls->SetWorldScale3D(FVector(flatPart, flatPart, thinPart));
+	UpWalls->SetRelativeLocation(FVector(0, 0, 0));
+	UpWalls->SetEnableGravity(false);
+	UpWalls->GetBodyInstance()->bLockXTranslation = true;
+	UpWalls->GetBodyInstance()->bLockYTranslation = true;
+	UpWalls->GetBodyInstance()->bLockZTranslation = true;
+	UpWalls->CastShadow = false;
+
+	DownWalls = CreateDefaultSubobject<UInstancedStaticMeshComponent>("DownWalls");
+	DownWalls->SetMobility(EComponentMobility::Stationary);
+	DownWalls->SetStaticMesh(CubeMesh);
+	DownWalls->SetRelativeScale3D(FVector(flatPart, flatPart, thinPart));
+	DownWalls->SetRelativeLocation(FVector(0, 0, 0));
+	DownWalls->SetEnableGravity(false);
+	DownWalls->GetBodyInstance()->bLockXTranslation = true;
+	DownWalls->GetBodyInstance()->bLockYTranslation = true;
+	DownWalls->GetBodyInstance()->bLockZTranslation = true;
+	DownWalls->CastShadow = false;
+
+	NorthWalls = CreateDefaultSubobject<UInstancedStaticMeshComponent>("NorthWalls");
+	NorthWalls->SetMobility(EComponentMobility::Stationary);
+	NorthWalls->SetStaticMesh(CubeMesh);
+	//NorthWalls->SetRelativeScale3D(FVector(flatPart, thinPart, flatPart));
+	NorthWalls->SetRelativeLocation(FVector(0, 0, 0));
+	NorthWalls->SetEnableGravity(false);
+	NorthWalls->GetBodyInstance()->bLockXTranslation = true;
+	NorthWalls->GetBodyInstance()->bLockYTranslation = true;
+	NorthWalls->GetBodyInstance()->bLockZTranslation = true;
+	NorthWalls->CastShadow = false;
+
+	SouthWalls = CreateDefaultSubobject<UInstancedStaticMeshComponent>("SouthWalls");
+	SouthWalls->SetMobility(EComponentMobility::Stationary);
+	SouthWalls->SetStaticMesh(CubeMesh);
+	//SouthWalls->SetRelativeScale3D(FVector(flatPart, thinPart, flatPart));
+	SouthWalls->SetRelativeLocation(FVector(0, 0, 0));
+	SouthWalls->SetEnableGravity(false);
+	SouthWalls->GetBodyInstance()->bLockXTranslation = true;
+	SouthWalls->GetBodyInstance()->bLockYTranslation = true;
+	SouthWalls->GetBodyInstance()->bLockZTranslation = true;
+	SouthWalls->CastShadow = false;
+
+	EastWalls = CreateDefaultSubobject<UInstancedStaticMeshComponent>("EastWalls");
+	EastWalls->SetMobility(EComponentMobility::Stationary);
+	EastWalls->SetStaticMesh(CubeMesh);
+	//EastWalls->SetRelativeScale3D(FVector(thinPart, flatPart, flatPart));
+	EastWalls->SetRelativeLocation(FVector(0, 0, 0));
+	EastWalls->SetEnableGravity(false);
+	EastWalls->GetBodyInstance()->bLockXTranslation = true;
+	EastWalls->GetBodyInstance()->bLockYTranslation = true;
+	EastWalls->GetBodyInstance()->bLockZTranslation = true;
+	EastWalls->CastShadow = false;
+
+	WestWalls = CreateDefaultSubobject<UInstancedStaticMeshComponent>("WestWalls");
+	WestWalls->SetMobility(EComponentMobility::Stationary);
+	WestWalls->SetStaticMesh(CubeMesh);
+	//WestWalls->SetRelativeScale3D(FVector(thinPart, flatPart, flatPart));
+	WestWalls->SetRelativeLocation(FVector(0, 0, 0));
+	WestWalls->SetEnableGravity(false);
+	WestWalls->GetBodyInstance()->bLockXTranslation = true;
+	WestWalls->GetBodyInstance()->bLockYTranslation = true;
+	WestWalls->GetBodyInstance()->bLockZTranslation = true;
+	WestWalls->CastShadow = false;
+
+	PlaceNodes();
 }
 
 // Called when the game starts or when spawned
@@ -65,38 +125,47 @@ int AMaze::width()
 
 void AMaze::PlaceNodes_Implementation()
 {
-	for(UMazeBox* bos : Boxes)
-	{
-		bos->DestroyComponent();
-	}
-
-	Boxes.Empty();
+	NodeData.Empty();
+	UpWalls->ClearInstances();
+	DownWalls->ClearInstances();
+	NorthWalls->ClearInstances();
+	SouthWalls->ClearInstances();
+	EastWalls->ClearInstances();
+	WestWalls->ClearInstances();
 	
-	for (int i = -halfWidth; i <= halfWidth; i++)
+	for (double i = -halfWidth; i <= halfWidth; i++)
 	{
-		RoomPos.X = i * RoomSizeInUnits.X;
-		for(int j = -halfDepth; j <= halfDepth; j++)
+		//RoomPos.X = i * RoomSizeInUnits.X;
+		RoomPos.X = i * 100;
+		for(double j = -halfDepth; j <= halfDepth; j++)
 		{
-			RoomPos.Y = j * RoomSizeInUnits.Y;
-			for (int k = -halfHeight; k <= halfHeight; k++)
+			//RoomPos.Y = j * RoomSizeInUnits.Y;
+			RoomPos.Y = j * 100;
+			for (double k = -halfHeight; k <= halfHeight; k++)
 			{
-				RoomPos.Z = k * RoomSizeInUnits.Z;
+				//RoomPos.Z = k * RoomSizeInUnits.Z;
+				RoomPos.Z = k * 100;
 				
-				VecNum = FIntVector(i, j, k);
+				VecNum = FVector(i, j, k);
+				NodeData.Emplace();
+				NodeData[NodeData.Num() - 1].NodePos = FIntVector(VecNum);
+				BuildRoom(VecNum);
 				
-				auto Bing = NewObject<UMazeBox>(this,GetNae(VecNum), RF_NoFlags, Maza.GetDefaultObject());
-				Bing->RegisterComponent();
-				Bing->SetRelativeLocation(RoomPos);
-				Bing->SetNode(VecNum);
-				Boxes.Add(Bing);
+				//auto Bing = NewObject<UMazeBox>(this,GetNae(VecNum), RF_NoFlags, Maza.GetDefaultObject());
+				//Bing->RegisterComponent();
+				//Bing->SetRelativeLocation(RoomPos);
+				//Bing->SetNode(VecNum);
+				//Boxes.Add(Bing);
 			}
 		}
 	}
+
+	ExpandRooms();
 }
 
 void AMaze::BuildMaze_Implementation()
 {
-	NumPos = NodeItems[rand() % NodeItems.Num()]->GetNode();
+	NumPos = NodeData[rand() % NodeData.Num()].NodePos;
 
 	bHasStarted = false;
 	bRunning = false;
@@ -128,7 +197,7 @@ void AMaze::BuildMaze_Implementation()
 			bRunning = true;
 	}
 
-	for (auto Element : NodeItems)
+	for (auto Element : NodeData)
 	{
 		
 	}
@@ -167,15 +236,15 @@ void AMaze::Walk_Implementation(FIntVector nuPos)
 
 void AMaze::Hunt_Implementation()
 {
-	for(int i = 0; i < NodeItems.Num(); i++)
+	for(int i = 0; i < NodeData.Num(); i++)
 	{
-		GetHunt(NodeItems[i]->GetNode());
-		if(abs(NodeItems[i]->GetNode().X) <= halfDepth && abs(NodeItems[i]->GetNode().Y) && abs(NodeItems[i]->GetNode().Z) && Visit[i] == false && abs(HuntPosit.X) <= halfDepth)
+		GetHunt(NodeData[i].NodePos);
+		if(abs(NodeData[i].NodePos.X) <= halfDepth && abs(NodeData[i].NodePos.Y) && abs(NodeData[i].NodePos.Z) && Visit[i] == false && abs(HuntPosit.X) <= halfDepth)
 		{
-			ClearToFrom(NodeItems[i]->GetNode(), HuntPosit);
+			ClearToFrom(NodeData[i].NodePos, HuntPosit);
 			bStartedHunt = false;
 			bBud = true;
-			UsdPos = NodeItems[i]->GetNode();
+			UsdPos = NodeData[i].NodePos;
 			return;
 		}
 	}
@@ -192,33 +261,57 @@ void AMaze::ClearToFrom_Implementation(FIntVector to, FIntVector from)
 {
 	if(to.X < from.X)
 	{
-		NodeItems[PointIndex(to)]->SetEast(false);
-		NodeItems[PointIndex(from)]->SetWest(false);
+		NodeData[PointIndex(to)].bEast = false;
+		EastWalls[PointIndex(to)].SetVisibility(false);
+		EastWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(from)].bWest = false;
+		WestWalls[PointIndex(from)].SetVisibility(false);
+		WestWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 	if(to.X > from.X)
 	{
-		NodeItems[PointIndex(to)]->SetWest(false);
-		NodeItems[PointIndex(from)]->SetEast(false);
+		NodeData[PointIndex(to)].bWest = false;
+		WestWalls[PointIndex(to)].SetVisibility(false);
+		WestWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(from)].bEast = false;
+		EastWalls[PointIndex(from)].SetVisibility(false);
+		EastWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 	if(to.Y < from.Y)
 	{
-		NodeItems[PointIndex(to)]->SetNorth(false);
-		NodeItems[PointIndex(from)]->SetSouth(false);
+		NodeData[PointIndex(to)].bNorth = false;
+		NorthWalls[PointIndex(to)].SetVisibility(false);
+		NorthWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(from)].bSouth = false;
+		SouthWalls[PointIndex(from)].SetVisibility(false);
+		SouthWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 	if(to.Y > from.Y)
 	{
-		NodeItems[PointIndex(to)]->SetSouth(false);
-		NodeItems[PointIndex(from)]->SetNorth(false);
+		NodeData[PointIndex(to)].bSouth = false;
+		SouthWalls[PointIndex(to)].SetVisibility(false);
+		SouthWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(from)].bNorth = false;
+		NorthWalls[PointIndex(from)].SetVisibility(false);
+		NorthWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 	if(to.Z < from.Z)
 	{
-		NodeItems[PointIndex(to)]->SetUp(false);
-		NodeItems[PointIndex(from)]->SetDown(false);
+		NodeData[PointIndex(to)].bUp = false;
+		UpWalls[PointIndex(to)].SetVisibility(false);
+		UpWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(from)].bDown = false;
+		DownWalls[PointIndex(from)].SetVisibility(false);
+		DownWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 	if(to.Z > from.Z)
 	{
-		NodeItems[PointIndex(to)]->SetDown(false);
-		NodeItems[PointIndex(from)]->SetUp(false);
+		NodeData[PointIndex(to)].bDown = false;
+		DownWalls[PointIndex(to)].SetVisibility(false);
+		DownWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(from)].bUp = false;
+		UpWalls[PointIndex(from)].SetVisibility(false);
+		UpWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 }
 
@@ -227,37 +320,37 @@ void AMaze::SetAdj_Implementation(FIntVector pont)
 	if(Adjacent.Num() != 0)
 		Adjacent.Reset();
 
-	Calc = NodeItems[PointIndex(pont)]->EastPoint();
+	Calc = NodeData[PointIndex(pont)].EastPoint();
 	if(abs(Calc.X) <= halfWidth && Visit[PointIndex(Calc)] == false)
 	{
 		Adjacent.Add(Calc);
 	}
 
-	Calc = NodeItems[PointIndex(pont)]->WestPoint();
+	Calc = NodeData[PointIndex(pont)].WestPoint();
 	if(abs(Calc.X) <= halfWidth && Visit[PointIndex(Calc)] == false)
 	{
 		Adjacent.Add(Calc);
 	}
 
-	Calc = NodeItems[PointIndex(pont)]->NorthPoint();
+	Calc = NodeData[PointIndex(pont)].NorthPoint();
 	if(abs(Calc.Y) <= halfDepth && Visit[PointIndex(Calc)] == false)
 	{
 		Adjacent.Add(Calc);
 	}
 
-	Calc = NodeItems[PointIndex(pont)]->SouthPoint();
+	Calc = NodeData[PointIndex(pont)].SouthPoint();
 	if(abs(Calc.Y) <= halfDepth && Visit[PointIndex(Calc)] == false)
 	{
 		Adjacent.Add(Calc);
 	}
 
-	Calc = NodeItems[PointIndex(pont)]->UpPoint();
+	Calc = NodeData[PointIndex(pont)].UpPoint();
 	if(abs(Calc.Z) <= halfHeight && Visit[PointIndex(Calc)] == false)
 	{
 		Adjacent.Add(Calc);
 	}
 
-	Calc = NodeItems[PointIndex(pont)]->DownPoint();
+	Calc = NodeData[PointIndex(pont)].DownPoint();
 	if(abs(Calc.Z) <= halfHeight && Visit[PointIndex(Calc)] == false)
 	{
 		Adjacent.Add(Calc);
@@ -315,6 +408,44 @@ FName AMaze::GetNae(FIntVector conve)
 {
 	return "Cube:" + conve.X + ':' + conve.Y + ':' + conve.Z;
 }
+
+void AMaze::BuildRoom_Implementation(FVector vec)
+{
+	//vec.X * RoomSizeInUnits.X) / flatPart
+	//Trils.SetScale3D(FVector(flatPart, flatPart, thinPart));
+	Trils.SetLocation(FVector(vec.X * 100, vec.Y * 100, flatPart * ((vec.Z * 100) + 50) / thinPart));
+	UpWalls->AddInstance(Trils); 
+	//UpWalls[0].SetRelativeScale3D(FVector(flatPart, flatPart, thinPart));
+	//Trils.SetScale3D(FVector(flatPart, flatPart, thinPart));
+	Trils.SetLocation(FVector(vec.X * 100, vec.Y * 100, flatPart * ((vec.Z * 100) - 50) / thinPart));
+	DownWalls->AddInstance(Trils);
+	//Trils.SetScale3D(FVector(flatPart, flatPart, thinPart));
+	Trils.SetLocation(FVector((vec.X * RoomSizeInUnits.X), (vec.Y * RoomSizeInUnits.Y) + DistS, (vec.Z * RoomSizeInUnits.Z)));
+	NorthWalls->AddInstance(Trils);
+	//Trils.SetScale3D(FVector(flatPart, flatPart, thinPart));
+	Trils.SetLocation(FVector((vec.X * RoomSizeInUnits.X), (vec.Y * RoomSizeInUnits.Y) - DistS, (vec.Z * RoomSizeInUnits.Z)));
+	SouthWalls->AddInstance(Trils);
+	//Trils.SetScale3D(FVector(flatPart, flatPart, thinPart));
+	Trils.SetLocation(FVector((vec.X * RoomSizeInUnits.X) + DistS, (vec.Y * RoomSizeInUnits.Y), (vec.Z * RoomSizeInUnits.Z)));
+	EastWalls->AddInstance(Trils);
+	//Trils.SetScale3D(FVector(flatPart, flatPart, thinPart));
+	Trils.SetLocation(FVector((vec.X * RoomSizeInUnits.X) - DistS, (vec.Y * RoomSizeInUnits.Y), (vec.Z * RoomSizeInUnits.Z)));
+	EastWalls->AddInstance(Trils);
+}
+
+void AMaze::ExpandRooms_Implementation()
+{
+	//UpWalls.I
+	for (auto Element : UpWalls->InstanceBodies)
+	{
+		
+		//Trils.SetScale3D(FVector(flatPart, flatPart, thinPart));
+		//Trils.SetLocation(FVector(Element.Transform.GetColumn(3).X, Element.Transform.GetColumn(3).Y, Element.Transform.GetColumn(3).Z));
+		//Element.Transform = Trils.ToMatrixNoScale();
+	}
+}
+
+
 
 
 
