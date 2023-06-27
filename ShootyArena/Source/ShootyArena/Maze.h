@@ -3,12 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/PointLight.h"
 #include "GameFramework/Actor.h"
 #include "Maze.generated.h"
 
 class AMazeCube;
 class UMazeBox;
 class UInstancedStaticMeshComponent;
+class UMeshComponent;
 class UBoxSerial;
 class UBoxItem;
 
@@ -208,6 +210,18 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UInstancedStaticMeshComponent* WestWalls;
+
+	//UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	//UMeshComponent* Mesh;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	USceneComponent* Center;
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class APointLight> Light;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<TSubclassOf<class APointLight>> Lights;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -237,13 +251,16 @@ public:
 	void GetHunt(FIntVector pont);
 
 	UFUNCTION(BlueprintCallable, Server, Reliable)
-	void MakeClean(AMazeCube* Cube);
+	void MakeClean(FNoden Cube);
 
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void BuildRoom(FVector vec);
 
 	UFUNCTION(BlueprintCallable, Server, Reliable)
 	void ExpandRooms();
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void Illuminate();
 	
 	FName GetNae(FIntVector conve);
 

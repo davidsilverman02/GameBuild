@@ -8,25 +8,26 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class AMazeCube;
+struct FNoden;
 struct FIntVector;
 #ifdef SHOOTYARENA_Maze_generated_h
 #error "Maze.generated.h already included, missing '#pragma once' in Maze.h"
 #endif
 #define SHOOTYARENA_Maze_generated_h
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_18_GENERATED_BODY \
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_20_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FNoden_Statics; \
 	SHOOTYARENA_API static class UScriptStruct* StaticStruct();
 
 
 template<> SHOOTYARENA_API UScriptStruct* StaticStruct<struct FNoden>();
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_SPARSE_DATA
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_RPC_WRAPPERS \
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_SPARSE_DATA
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_RPC_WRAPPERS \
+	virtual void Illuminate_Implementation(); \
 	virtual void ExpandRooms_Implementation(); \
 	virtual void BuildRoom_Implementation(FVector vec); \
-	virtual void MakeClean_Implementation(AMazeCube* Cube); \
+	virtual void MakeClean_Implementation(FNoden Cube); \
 	virtual void GetHunt_Implementation(FIntVector pont); \
 	virtual void SetAdj_Implementation(FIntVector pont); \
 	virtual void ClearToFrom_Implementation(FIntVector to, FIntVector from); \
@@ -35,6 +36,7 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<struct FNoden>();
 	virtual void BuildMaze_Implementation(); \
 	virtual void PlaceNodes_Implementation(); \
  \
+	DECLARE_FUNCTION(execIlluminate); \
 	DECLARE_FUNCTION(execExpandRooms); \
 	DECLARE_FUNCTION(execBuildRoom); \
 	DECLARE_FUNCTION(execMakeClean); \
@@ -51,10 +53,11 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<struct FNoden>();
 	DECLARE_FUNCTION(execwidth);
 
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void Illuminate_Implementation(); \
 	virtual void ExpandRooms_Implementation(); \
 	virtual void BuildRoom_Implementation(FVector vec); \
-	virtual void MakeClean_Implementation(AMazeCube* Cube); \
+	virtual void MakeClean_Implementation(FNoden Cube); \
 	virtual void GetHunt_Implementation(FIntVector pont); \
 	virtual void SetAdj_Implementation(FIntVector pont); \
 	virtual void ClearToFrom_Implementation(FIntVector to, FIntVector from); \
@@ -63,6 +66,7 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<struct FNoden>();
 	virtual void BuildMaze_Implementation(); \
 	virtual void PlaceNodes_Implementation(); \
  \
+	DECLARE_FUNCTION(execIlluminate); \
 	DECLARE_FUNCTION(execExpandRooms); \
 	DECLARE_FUNCTION(execBuildRoom); \
 	DECLARE_FUNCTION(execMakeClean); \
@@ -79,7 +83,7 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<struct FNoden>();
 	DECLARE_FUNCTION(execwidth);
 
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_EVENT_PARMS \
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_EVENT_PARMS \
 	struct Maze_eventBuildRoom_Parms \
 	{ \
 		FVector vec; \
@@ -95,7 +99,7 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<struct FNoden>();
 	}; \
 	struct Maze_eventMakeClean_Parms \
 	{ \
-		AMazeCube* Cube; \
+		FNoden Cube; \
 	}; \
 	struct Maze_eventSetAdj_Parms \
 	{ \
@@ -107,8 +111,8 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<struct FNoden>();
 	};
 
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_CALLBACK_WRAPPERS
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_INCLASS_NO_PURE_DECLS \
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_CALLBACK_WRAPPERS
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMaze(); \
 	friend struct Z_Construct_UClass_AMaze_Statics; \
@@ -117,7 +121,7 @@ public: \
 	DECLARE_SERIALIZER(AMaze)
 
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_INCLASS \
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_INCLASS \
 private: \
 	static void StaticRegisterNativesAMaze(); \
 	friend struct Z_Construct_UClass_AMaze_Statics; \
@@ -126,7 +130,7 @@ public: \
 	DECLARE_SERIALIZER(AMaze)
 
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_STANDARD_CONSTRUCTORS \
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AMaze(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AMaze) \
@@ -139,7 +143,7 @@ private: \
 public:
 
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_ENHANCED_CONSTRUCTORS \
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AMaze(AMaze&&); \
@@ -150,30 +154,30 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AMaze)
 
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_102_PROLOG \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_EVENT_PARMS
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_104_PROLOG \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_EVENT_PARMS
 
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_GENERATED_BODY_LEGACY \
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_SPARSE_DATA \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_RPC_WRAPPERS \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_CALLBACK_WRAPPERS \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_INCLASS \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_STANDARD_CONSTRUCTORS \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_SPARSE_DATA \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_RPC_WRAPPERS \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_CALLBACK_WRAPPERS \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_INCLASS \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define FID_ShootyArena_Source_ShootyArena_Maze_h_105_GENERATED_BODY \
+#define FID_ShootyArena_Source_ShootyArena_Maze_h_107_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_SPARSE_DATA \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_CALLBACK_WRAPPERS \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_INCLASS_NO_PURE_DECLS \
-	FID_ShootyArena_Source_ShootyArena_Maze_h_105_ENHANCED_CONSTRUCTORS \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_SPARSE_DATA \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_CALLBACK_WRAPPERS \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_INCLASS_NO_PURE_DECLS \
+	FID_ShootyArena_Source_ShootyArena_Maze_h_107_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
