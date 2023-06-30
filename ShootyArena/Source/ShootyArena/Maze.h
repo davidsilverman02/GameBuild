@@ -13,6 +13,9 @@ class UInstancedStaticMeshComponent;
 class UMeshComponent;
 class UBoxSerial;
 class UBoxItem;
+class AMaze;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSeedRepl, AMaze*, Maza);
 
 USTRUCT(BlueprintType)
 struct FNoden
@@ -37,6 +40,9 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bEast;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bVisited;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FIntVector NodePos;
@@ -49,6 +55,7 @@ public:
 		bSouth = true;
 		bEast = true;
 		bWest = true;
+		bVisited = false;
 	}
 	
 	FNoden(FIntVector pos)
@@ -60,6 +67,7 @@ public:
 		bSouth = true;
 		bEast = true;
 		bWest = true;
+		bVisited = false;
 	}
 	
 	FIntVector UpPoint()
@@ -105,12 +113,22 @@ UCLASS()
 class SHOOTYARENA_API AMaze : public AActor
 {
 	GENERATED_BODY()
-	
+
 public:	
 	// Sets default values for this actor's properties
 	AMaze();
 
+	FIntVector ToPos;
+
+	FIntVector FromPos;
 protected:
+
+	//UPROPERTY(EditDefaultsOnly, ReplicatedUsing="OnRep_Seed", Category= "Seed")
+	UPROPERTY(Replicated)
+	uint32 Seed;
+
+	FRandomStream Rand;
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -152,8 +170,8 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<FNoden> NodeData;
 
-	UPROPERTY(BlueprintReadWrite)
-	TMap<int, bool> Visit;
+	//UPROPERTY(BlueprintReadWrite)
+	//TArray<bool> Visit;
 	
 	UPROPERTY(EditAnywhere)
 	bool bHasStarted;
@@ -226,45 +244,55 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable)
 	void PlaceNodes();
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable)
 	void BuildMaze();
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
-	void Walk(FIntVector nuPos);
+	UFUNCTION(BlueprintCallable)
+	void Walk(FIntVector NuPos);
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable)
 	void Hunt();
 
 	UFUNCTION(BlueprintCallable)
 	int PointIndex(FIntVector pos);
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
-	void ClearToFrom(FIntVector to, FIntVector from);
+	UFUNCTION(BlueprintCallable)
+	void ClearToFrom(FIntVector To, FIntVector From, int TestX);
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable)
 	void SetAdj(FIntVector pont);
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable)
 	void GetHunt(FIntVector pont);
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable)
 	void MakeClean(FNoden Cube);
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable)
 	void BuildRoom(FVector vec);
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable)
 	void ExpandRooms();
 
-	UFUNCTION(BlueprintCallable, Server, Reliable)
+	UFUNCTION(BlueprintCallable)
 	void Illuminate();
+
+	UFUNCTION()
+	void OnRep_Seed();
+	
+	//UFUNCTION(BlueprintCallable)
+	//void SetSeed();
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	FName GetNae(FIntVector conve);
 
 	FTransform Trils;
 
 	FVector VecNum;
+	
+	FSeedRepl SeedRepl;
 };

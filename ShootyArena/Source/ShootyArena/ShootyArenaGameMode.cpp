@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ShootyArenaGameMode.h"
+
+#include "ArenaPlayerState.h"
 #include "ShootyArenaCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
@@ -11,4 +13,5 @@ AShootyArenaGameMode::AShootyArenaGameMode()
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/FirstPerson/Blueprints/BP_FirstPersonCharacter"));
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
+	PlayerStateClass = AArenaPlayerState::StaticClass();
 }

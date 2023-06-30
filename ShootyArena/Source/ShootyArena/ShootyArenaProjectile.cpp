@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ShootyArenaProjectile.h"
+
+#include "ArenaPlayerState.h"
 #include "ShootyArenaCharacter.h"
 #include "StatisticComponent.h"
 #include "Actions/PawnActionsComponent.h"
@@ -43,14 +45,24 @@ void AShootyArenaProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherAc
 		if(OtherActor != Instigator)
 		{
 			OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
-			
-			if(OtherActor->FindComponentByClass<UStatisticComponent>())
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Your Message"));
-				Instigator->FindComponentByClass<UStatisticComponent>()->AddPoints(1);
-			}
 
 			Destroy();
 		}
+	}
+
+	if(OtherActor->FindComponentByClass<UStatisticComponent>() && OtherActor != Instigator)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Your Message"));
+		//Instigator->FindComponentByClass<UStatisticComponent>()->AddPoints(1);
+
+		if(APawn* Pon = Cast<APawn>(OtherActor))
+		{
+			if(AArenaPlayerState* Arin = Pon->GetPlayerState<AArenaPlayerState>())
+			{
+				Arin->AddPoints(1);
+			}
+		}
+		
+		Destroy();
 	}
 }

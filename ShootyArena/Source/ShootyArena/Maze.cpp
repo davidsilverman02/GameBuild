@@ -2,12 +2,12 @@
 
 
 #include "Maze.h"
-
-#include "MazeBox.h"
 #include "MazeCube.h"
-#include "SAdvancedRotationInputBox.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Components/MeshComponent.h"
+#include "Net/UnrealNetwork.h"
+#include "UObject/ObjectMacros.h"
+#include "HAL/Platform.h"
 
 
 // Sets default values
@@ -15,9 +15,9 @@ AMaze::AMaze()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	halfWidth = 1;
-	halfDepth = 1;
-	halfHeight = 1;
+	halfWidth = 2;
+	halfDepth = 2;
+	halfHeight = 2;
 	RoomSizeInUnits = FVector3f(800, 800, 800);
 
 	flatPart = 8.0f;
@@ -25,6 +25,8 @@ AMaze::AMaze()
 	DistS = 390.0f;
 	CubeMesh = ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("StaticMesh'/Engine/BasicShapes/Cube.Cube'")).Object;
 
+	bReplicates = true;
+	
 	Center = CreateDefaultSubobject<USceneComponent>("Center");
 	Center->SetupAttachment(RootComponent);
 	
@@ -93,8 +95,6 @@ AMaze::AMaze()
 	WestWalls->GetBodyInstance()->bLockYTranslation = true;
 	WestWalls->GetBodyInstance()->bLockZTranslation = true;
 	WestWalls->CastShadow = false;
-
-	PlaceNodes();
 }
 
 // Called when the game starts or when spawned
@@ -102,7 +102,18 @@ void AMaze::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//Illuminate();
+	if(HasAuthority())
+		Seed = rand();
+
+	Rand = FRandomStream(Seed);
+	
+	Rand.Initialize(Seed);
+	
+	PlaceNodes();
+	
+	Illuminate();
+
+	BuildMaze();
 }
 
 // Called every frame
@@ -127,7 +138,7 @@ int AMaze::width()
 	return (halfWidth * 2) + 1;
 }
 
-void AMaze::PlaceNodes_Implementation()
+void AMaze::PlaceNodes()
 {
 	NodeData.Empty();
 	UpWalls->ClearInstances();
@@ -161,9 +172,12 @@ void AMaze::PlaceNodes_Implementation()
 	ExpandRooms();
 }
 
-void AMaze::BuildMaze_Implementation()
+void AMaze::BuildMaze()
 {
-	NumPos = NodeData[rand() % NodeData.Num()].NodePos;
+	//UE_LOG(LogTemp, Warning, TEXT("%d"), NodeData.Num())
+	//UE_LOG(LogTemp, Warning, TEXT("%d"), FMath::RandRange(0, NodeData.Num()))
+	//FMath::RandRange(0, NodeData.Num()).std::to_string()
+	NumPos = NodeData[Rand.RandRange(0, NumPos.Size() - 1)].NodePos;
 
 	bHasStarted = false;
 	bRunning = false;
@@ -187,10 +201,10 @@ void AMaze::BuildMaze_Implementation()
 				NumPos = UsdPos;
 			}
 		}
-
+	
 		if(bHasStarted == false)
 			bHasStarted = true;
-
+	
 		if(bStartedHunt && bCantHunt)
 			bRunning = true;
 	}
@@ -201,30 +215,36 @@ void AMaze::BuildMaze_Implementation()
 	}
 }
 
-void AMaze::Walk_Implementation(FIntVector nuPos)
+void AMaze::Walk(FIntVector NuPos)
 {
+	//UE_LOG(LogTemp, Warning, TEXT("Yes"))
+	
 	bStartedHunt = false;
 
-	UsdPos = nuPos;
+	UsdPos = NuPos;
 	
 	if(bBud == false)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Yes"))
 		if(bHasStarted == true)
 		{
-			ClearToFrom(UsdPos, Stack);
+			//UE_LOG(LogTemp, Warning, TEXT("%s"), *UsdPos.ToString())
+			//UE_LOG(LogTemp, Warning, TEXT("%s"), *Stack.ToString())
+			ToPos = UsdPos;
+			ClearToFrom(UsdPos, Stack, UsdPos.Y);
 		}
 	}
 	else
 		bBud = false;
-
-	Visit[PointIndex(nuPos)] = true;
+	
+	NodeData[PointIndex(NuPos)].bVisited = true;
 
 	SetAdj(UsdPos);
 
 	if(Adjacent.Num() != 0)
 	{
 		Stack = UsdPos;
-		UsdPos = Adjacent[rand() % Adjacent.Num()];
+		UsdPos = Adjacent[Rand.RandRange(0, Adjacent.Num() - 1)];
 	}
 	else
 	{
@@ -232,14 +252,15 @@ void AMaze::Walk_Implementation(FIntVector nuPos)
 	}
 }
 
-void AMaze::Hunt_Implementation()
+void AMaze::Hunt()
 {
 	for(int i = 0; i < NodeData.Num(); i++)
 	{
 		GetHunt(NodeData[i].NodePos);
-		if(abs(NodeData[i].NodePos.X) <= halfDepth && abs(NodeData[i].NodePos.Y) && abs(NodeData[i].NodePos.Z) && Visit[i] == false && abs(HuntPosit.X) <= halfDepth)
+		if(abs(NodeData[i].NodePos.X) <= halfWidth && abs(NodeData[i].NodePos.Y) <= halfDepth && abs(NodeData[i].NodePos.Z) <= halfHeight && NodeData[i].bVisited == false && abs(HuntPosit.X) <= halfWidth && abs(HuntPosit.Y) <= halfDepth && abs(HuntPosit.Z) <= halfHeight)
 		{
-			ClearToFrom(NodeData[i].NodePos, HuntPosit);
+			UE_LOG(LogTemp, Warning, TEXT("Ninlil"))
+			ClearToFrom(NodeData[i].NodePos, HuntPosit, NodeData[i].NodePos.Z);
 			bStartedHunt = false;
 			bBud = true;
 			UsdPos = NodeData[i].NodePos;
@@ -255,113 +276,123 @@ int AMaze::PointIndex(FIntVector pos)
 	return pos.Z + halfHeight + ((pos.Y + halfDepth) * height()) + ((pos.X + halfWidth) * height() * depth());
 }
 
-void AMaze::ClearToFrom_Implementation(FIntVector to, FIntVector from)
+void AMaze::ClearToFrom(FIntVector To, FIntVector From, int TestX)
 {
-	if(to.X < from.X)
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *To.ToString())
+	UE_LOG(LogTemp, Warning, TEXT("%d"), To.X)
+	UE_LOG(LogTemp, Warning, TEXT("%d"), To.Y)
+	UE_LOG(LogTemp, Warning, TEXT("%d"), To.Z)
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *From.ToString())
+	UE_LOG(LogTemp, Warning, TEXT("%d"), From.X)
+	UE_LOG(LogTemp, Warning, TEXT("%d"), From.Y)
+	UE_LOG(LogTemp, Warning, TEXT("%d"), From.Z)
+
+	FIntVector Tst = ToPos;
+	if(To.X < From.X)
 	{
-		NodeData[PointIndex(to)].bEast = false;
-		EastWalls[PointIndex(to)].SetVisibility(false);
-		EastWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(from)].bWest = false;
-		WestWalls[PointIndex(from)].SetVisibility(false);
-		WestWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(To)].bEast = false;
+		EastWalls[PointIndex(To)].SetVisibility(false);
+		EastWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(From)].bWest = false;
+		WestWalls[PointIndex(From)].SetVisibility(false);
+		WestWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
-	if(to.X > from.X)
+	if(To.X > From.X)
 	{
-		NodeData[PointIndex(to)].bWest = false;
-		WestWalls[PointIndex(to)].SetVisibility(false);
-		WestWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(from)].bEast = false;
-		EastWalls[PointIndex(from)].SetVisibility(false);
-		EastWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(To)].bWest = false;
+		WestWalls[PointIndex(To)].SetVisibility(false);
+		WestWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(From)].bEast = false;
+		EastWalls[PointIndex(From)].SetVisibility(false);
+		EastWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
-	if(to.Y < from.Y)
+	if(To.Y < From.Y)
 	{
-		NodeData[PointIndex(to)].bNorth = false;
-		NorthWalls[PointIndex(to)].SetVisibility(false);
-		NorthWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(from)].bSouth = false;
-		SouthWalls[PointIndex(from)].SetVisibility(false);
-		SouthWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(To)].bNorth = false;
+		NorthWalls[PointIndex(To)].SetVisibility(false);
+		NorthWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(From)].bSouth = false;
+		SouthWalls[PointIndex(From)].SetVisibility(false);
+		SouthWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
-	if(to.Y > from.Y)
+	if(To.Y > From.Y)
 	{
-		NodeData[PointIndex(to)].bSouth = false;
-		SouthWalls[PointIndex(to)].SetVisibility(false);
-		SouthWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(from)].bNorth = false;
-		NorthWalls[PointIndex(from)].SetVisibility(false);
-		NorthWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(To)].bSouth = false;
+		SouthWalls[PointIndex(To)].SetVisibility(false);
+		SouthWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(From)].bNorth = false;
+		NorthWalls[PointIndex(From)].SetVisibility(false);
+		NorthWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
-	if(to.Z < from.Z)
+	if(To.Z < From.Z)
 	{
-		NodeData[PointIndex(to)].bUp = false;
-		UpWalls[PointIndex(to)].SetVisibility(false);
-		UpWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(from)].bDown = false;
-		DownWalls[PointIndex(from)].SetVisibility(false);
-		DownWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(To)].bUp = false;
+		UpWalls[PointIndex(To)].SetVisibility(false);
+		UpWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(From)].bDown = false;
+		DownWalls[PointIndex(From)].SetVisibility(false);
+		DownWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
-	if(to.Z > from.Z)
+	if(To.Z > From.Z)
 	{
-		NodeData[PointIndex(to)].bDown = false;
-		DownWalls[PointIndex(to)].SetVisibility(false);
-		DownWalls[PointIndex(to)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(from)].bUp = false;
-		UpWalls[PointIndex(from)].SetVisibility(false);
-		UpWalls[PointIndex(from)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(To)].bDown = false;
+		DownWalls[PointIndex(To)].SetVisibility(false);
+		DownWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(From)].bUp = false;
+		UpWalls[PointIndex(From)].SetVisibility(false);
+		UpWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 }
 
-void AMaze::SetAdj_Implementation(FIntVector pont)
+void AMaze::SetAdj(FIntVector pont)
 {
 	if(Adjacent.Num() != 0)
 		Adjacent.Reset();
 
 	Calc = NodeData[PointIndex(pont)].EastPoint();
-	if(abs(Calc.X) <= halfWidth && Visit[PointIndex(Calc)] == false)
+	if(abs(Calc.X) <= halfWidth && NodeData[PointIndex(Calc)].bVisited == false)
 	{
 		Adjacent.Add(Calc);
 	}
 
 	Calc = NodeData[PointIndex(pont)].WestPoint();
-	if(abs(Calc.X) <= halfWidth && Visit[PointIndex(Calc)] == false)
+	if(abs(Calc.X) <= halfWidth && NodeData[PointIndex(Calc)].bVisited == false)
 	{
 		Adjacent.Add(Calc);
 	}
 
 	Calc = NodeData[PointIndex(pont)].NorthPoint();
-	if(abs(Calc.Y) <= halfDepth && Visit[PointIndex(Calc)] == false)
+	if(abs(Calc.Y) <= halfDepth && NodeData[PointIndex(Calc)].bVisited == false)
 	{
 		Adjacent.Add(Calc);
 	}
 
 	Calc = NodeData[PointIndex(pont)].SouthPoint();
-	if(abs(Calc.Y) <= halfDepth && Visit[PointIndex(Calc)] == false)
+	if(abs(Calc.Y) <= halfDepth && NodeData[PointIndex(Calc)].bVisited == false)
 	{
 		Adjacent.Add(Calc);
 	}
 
 	Calc = NodeData[PointIndex(pont)].UpPoint();
-	if(abs(Calc.Z) <= halfHeight && Visit[PointIndex(Calc)] == false)
+	if(abs(Calc.Z) <= halfHeight && NodeData[PointIndex(Calc)].bVisited == false)
 	{
 		Adjacent.Add(Calc);
 	}
 
 	Calc = NodeData[PointIndex(pont)].DownPoint();
-	if(abs(Calc.Z) <= halfHeight && Visit[PointIndex(Calc)] == false)
+	if(abs(Calc.Z) <= halfHeight && NodeData[PointIndex(Calc)].bVisited == false)
 	{
 		Adjacent.Add(Calc);
 	}
 }
 
-void AMaze::GetHunt_Implementation(FIntVector pont)
+void AMaze::GetHunt(FIntVector pont)
 {
 	SetAdj(pont);
 
 	if(Adjacent.Num() != 0)
 	{
-		HuntPosit = Adjacent[rand() % Adjacent.Num()];
+		HuntPosit = Adjacent[Rand.RandRange(0, Adjacent.Num() - 1)];
 	}
 	else
 	{
@@ -369,36 +400,36 @@ void AMaze::GetHunt_Implementation(FIntVector pont)
 	}
 }
 
-void AMaze::MakeClean_Implementation(FNoden Cube)
+void AMaze::MakeClean(FNoden Cube)
 {
 	if(Cube.bNorth == false && Cube.bSouth && Cube.bEast && Cube.bWest && Cube.bUp && Cube.bDown && abs(Cube.SouthPoint().Y) <= halfDepth)
 	{
-		ClearToFrom(Cube.NodePos, Cube.SouthPoint());
+		ClearToFrom(Cube.NodePos, Cube.SouthPoint(), Cube.NodePos.Z);
 	}
 
 	if(Cube.bNorth && Cube.bSouth == false && Cube.bEast && Cube.bWest && Cube.bUp && Cube.bDown && abs(Cube.NorthPoint().Y) <= halfDepth)
 	{
-		ClearToFrom(Cube.NodePos, Cube.NorthPoint());
+		ClearToFrom(Cube.NodePos, Cube.NorthPoint(), Cube.NodePos.Z);
 	}
 
 	if(Cube.bNorth && Cube.bSouth && Cube.bEast == false && Cube.bEast && Cube.bUp && Cube.bDown && abs(Cube.WestPoint().X) <= halfWidth)
 	{
-		ClearToFrom(Cube.NodePos, Cube.WestPoint());
+		ClearToFrom(Cube.NodePos, Cube.WestPoint(), Cube.NodePos.Z);
 	}
 
 	if(Cube.bNorth && Cube.bSouth && Cube.bEast && Cube.bWest == false && Cube.bUp && Cube.bDown && abs(Cube.EastPoint().X) <= halfWidth)
 	{
-		ClearToFrom(Cube.NodePos, Cube.EastPoint());
+		ClearToFrom(Cube.NodePos, Cube.EastPoint(), Cube.NodePos.Z);
 	}
 
 	if(Cube.bNorth && Cube.bSouth && Cube.bEast && Cube.bWest && Cube.bUp == false && Cube.bDown && abs(Cube.DownPoint().Z) <= halfHeight)
 	{
-		ClearToFrom(Cube.NodePos, Cube.DownPoint());
+		ClearToFrom(Cube.NodePos, Cube.DownPoint(), Cube.NodePos.Z);
 	}
 
 	if(Cube.bNorth && Cube.bSouth && Cube.bEast && Cube.bWest && Cube.bUp && Cube.bUp == false && abs(Cube.UpPoint().Z) <= halfHeight)
 	{
-		ClearToFrom(Cube.NodePos, Cube.UpPoint());
+		ClearToFrom(Cube.NodePos, Cube.UpPoint(), Cube.NodePos.Z);
 	}
 }
 
@@ -407,7 +438,7 @@ FName AMaze::GetNae(FIntVector conve)
 	return "Cube:" + conve.X + ':' + conve.Y + ':' + conve.Z;
 }
 
-void AMaze::BuildRoom_Implementation(FVector vec)
+void AMaze::BuildRoom(FVector vec)
 {
 	Trils.SetLocation(FVector(vec.X * 100, vec.Y * 100, flatPart * ((vec.Z * 100) + 50) / thinPart));
 	UpWalls->AddInstance(Trils); 
@@ -423,7 +454,7 @@ void AMaze::BuildRoom_Implementation(FVector vec)
 	WestWalls->AddInstance(Trils);
 }
 
-void AMaze::ExpandRooms_Implementation()
+void AMaze::ExpandRooms()
 {
 	//UpWalls.I
 	for (auto Element : UpWalls->InstanceBodies)
@@ -435,7 +466,7 @@ void AMaze::ExpandRooms_Implementation()
 	}
 }
 
-void AMaze::Illuminate_Implementation()
+void AMaze::Illuminate()
 {
 	FActorSpawnParameters ActorSpawnParams;
 	FRotator SpawnBa;
@@ -456,13 +487,25 @@ void AMaze::Illuminate_Implementation()
 				VecNum = FVector(i, j, k);
 
 				Lights.Add(Light);
-				GetWorld()->SpawnActor<APointLight>(Lights[Lights.Num() - 1], RoomPos, SpawnBa, ActorSpawnParams);
+				GetWorld()->SpawnActor<APointLight>(Lights[Lights.Num() - 1], GetActorLocation() + RoomPos, SpawnBa, ActorSpawnParams);
 				//NodeData.Emplace();
 				//NodeData[NodeData.Num() - 1].NodePos = FIntVector(VecNum);
 				//BuildRoom(VecNum);
 			}
 		}
 	}
+}
+
+void AMaze::OnRep_Seed()
+{
+	SeedRepl.Broadcast(this);
+}
+
+void AMaze::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	
+	DOREPLIFETIME(AMaze, Seed);
 }
 
 
