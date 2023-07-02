@@ -260,7 +260,7 @@ public:
 	int PointIndex(FIntVector pos);
 
 	UFUNCTION(BlueprintCallable)
-	void ClearToFrom(FIntVector To, FIntVector From, int TestX);
+	void ClearToFrom();
 
 	UFUNCTION(BlueprintCallable)
 	void SetAdj(FIntVector pont);
@@ -274,6 +274,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void BuildRoom(FVector vec);
 
+	UFUNCTION(BlueprintCallable)
+	void BuildRooms();
+
+	UFUNCTION(BlueprintCallable)
+	void MakeRoom();
+	
 	UFUNCTION(BlueprintCallable)
 	void ExpandRooms();
 

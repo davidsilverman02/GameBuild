@@ -38,6 +38,4 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FOnPointsChanged OnPointsChanged;
-
-	
 };

@@ -52,7 +52,6 @@ void AShootyArenaCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
-
 }
 
 //////////////////////////////////////////////////////////////////////////// Input
@@ -203,6 +202,23 @@ void AShootyArenaCharacter::Shoot_Implementation()
 			World->SpawnActor<AShootyArenaProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
 		}
 	}
+}
+
+int AShootyArenaCharacter::GetArenaPlayerStatePoints()
+{
+	if(AArenaPlayerState* Arn = Cast<AArenaPlayerState, APlayerState>(GetPlayerState()))
+	{
+		return Arn->GetPoints();
+	}
+	else
+	{
+		return -1;
+	}
+}
+
+int AShootyArenaCharacter::GetMyPlayerIndex()
+{
+	return GetPlayerState()->GetPlayerId();
 }
 
 

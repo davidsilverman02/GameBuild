@@ -42,6 +42,8 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<struct FNoden>();
 	DECLARE_FUNCTION(execOnRep_Seed); \
 	DECLARE_FUNCTION(execIlluminate); \
 	DECLARE_FUNCTION(execExpandRooms); \
+	DECLARE_FUNCTION(execMakeRoom); \
+	DECLARE_FUNCTION(execBuildRooms); \
 	DECLARE_FUNCTION(execBuildRoom); \
 	DECLARE_FUNCTION(execMakeClean); \
 	DECLARE_FUNCTION(execGetHunt); \
@@ -62,6 +64,8 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<struct FNoden>();
 	DECLARE_FUNCTION(execOnRep_Seed); \
 	DECLARE_FUNCTION(execIlluminate); \
 	DECLARE_FUNCTION(execExpandRooms); \
+	DECLARE_FUNCTION(execMakeRoom); \
+	DECLARE_FUNCTION(execBuildRooms); \
 	DECLARE_FUNCTION(execBuildRoom); \
 	DECLARE_FUNCTION(execMakeClean); \
 	DECLARE_FUNCTION(execGetHunt); \

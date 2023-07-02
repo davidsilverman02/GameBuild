@@ -112,8 +112,10 @@ void AMaze::BeginPlay()
 	PlaceNodes();
 	
 	Illuminate();
-
+	
 	BuildMaze();
+
+	BuildRooms();
 }
 
 // Called every frame
@@ -164,12 +166,12 @@ void AMaze::PlaceNodes()
 				VecNum = FVector(i, j, k);
 				NodeData.Emplace();
 				NodeData[NodeData.Num() - 1].NodePos = FIntVector(VecNum);
-				BuildRoom(VecNum);
+				//BuildRoom(VecNum);
 			}
 		}
 	}
 
-	ExpandRooms();
+	//ExpandRooms();
 }
 
 void AMaze::BuildMaze()
@@ -195,7 +197,7 @@ void AMaze::BuildMaze()
 		{
 			Hunt();
 			NumPos = UsdPos;
-			if(bCantHunt)
+			if(bCantHunt == false)
 			{
 				Walk(NumPos);
 				NumPos = UsdPos;
@@ -211,13 +213,14 @@ void AMaze::BuildMaze()
 
 	for (auto Element : NodeData)
 	{
-		
+		if(Element.bVisited == false)
+			UE_LOG(LogTemp, Warning, TEXT("Walk"))
 	}
 }
 
 void AMaze::Walk(FIntVector NuPos)
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Yes"))
+	UE_LOG(LogTemp, Warning, TEXT("Walk"))
 	
 	bStartedHunt = false;
 
@@ -225,13 +228,11 @@ void AMaze::Walk(FIntVector NuPos)
 	
 	if(bBud == false)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Yes"))
 		if(bHasStarted == true)
 		{
-			//UE_LOG(LogTemp, Warning, TEXT("%s"), *UsdPos.ToString())
-			//UE_LOG(LogTemp, Warning, TEXT("%s"), *Stack.ToString())
 			ToPos = UsdPos;
-			ClearToFrom(UsdPos, Stack, UsdPos.Y);
+			FromPos = Stack;
+			ClearToFrom();
 		}
 	}
 	else
@@ -254,13 +255,16 @@ void AMaze::Walk(FIntVector NuPos)
 
 void AMaze::Hunt()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Hunt"))
 	for(int i = 0; i < NodeData.Num(); i++)
 	{
 		GetHunt(NodeData[i].NodePos);
 		if(abs(NodeData[i].NodePos.X) <= halfWidth && abs(NodeData[i].NodePos.Y) <= halfDepth && abs(NodeData[i].NodePos.Z) <= halfHeight && NodeData[i].bVisited == false && abs(HuntPosit.X) <= halfWidth && abs(HuntPosit.Y) <= halfDepth && abs(HuntPosit.Z) <= halfHeight)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Ninlil"))
-			ClearToFrom(NodeData[i].NodePos, HuntPosit, NodeData[i].NodePos.Z);
+			ToPos = NodeData[i].NodePos;
+			FromPos = HuntPosit;
+			ClearToFrom();
 			bStartedHunt = false;
 			bBud = true;
 			UsdPos = NodeData[i].NodePos;
@@ -276,71 +280,37 @@ int AMaze::PointIndex(FIntVector pos)
 	return pos.Z + halfHeight + ((pos.Y + halfDepth) * height()) + ((pos.X + halfWidth) * height() * depth());
 }
 
-void AMaze::ClearToFrom(FIntVector To, FIntVector From, int TestX)
+void AMaze::ClearToFrom()
 {
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *To.ToString())
-	UE_LOG(LogTemp, Warning, TEXT("%d"), To.X)
-	UE_LOG(LogTemp, Warning, TEXT("%d"), To.Y)
-	UE_LOG(LogTemp, Warning, TEXT("%d"), To.Z)
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *From.ToString())
-	UE_LOG(LogTemp, Warning, TEXT("%d"), From.X)
-	UE_LOG(LogTemp, Warning, TEXT("%d"), From.Y)
-	UE_LOG(LogTemp, Warning, TEXT("%d"), From.Z)
-
-	FIntVector Tst = ToPos;
-	if(To.X < From.X)
+	if(ToPos.X < FromPos.X)
 	{
-		NodeData[PointIndex(To)].bEast = false;
-		EastWalls[PointIndex(To)].SetVisibility(false);
-		EastWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(From)].bWest = false;
-		WestWalls[PointIndex(From)].SetVisibility(false);
-		WestWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(ToPos)].bEast = false;
+		NodeData[PointIndex(FromPos)].bWest = false;
 	}
-	if(To.X > From.X)
+	if(ToPos.X > FromPos.X)
 	{
-		NodeData[PointIndex(To)].bWest = false;
-		WestWalls[PointIndex(To)].SetVisibility(false);
-		WestWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(From)].bEast = false;
-		EastWalls[PointIndex(From)].SetVisibility(false);
-		EastWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(ToPos)].bWest = false;
+		NodeData[PointIndex(FromPos)].bEast = false;
 	}
-	if(To.Y < From.Y)
+	if(ToPos.Y < FromPos.Y)
 	{
-		NodeData[PointIndex(To)].bNorth = false;
-		NorthWalls[PointIndex(To)].SetVisibility(false);
-		NorthWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(From)].bSouth = false;
-		SouthWalls[PointIndex(From)].SetVisibility(false);
-		SouthWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(ToPos)].bNorth = false;
+		NodeData[PointIndex(FromPos)].bSouth = false;
 	}
-	if(To.Y > From.Y)
+	if(ToPos.Y > FromPos.Y)
 	{
-		NodeData[PointIndex(To)].bSouth = false;
-		SouthWalls[PointIndex(To)].SetVisibility(false);
-		SouthWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(From)].bNorth = false;
-		NorthWalls[PointIndex(From)].SetVisibility(false);
-		NorthWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(ToPos)].bSouth = false;
+		NodeData[PointIndex(FromPos)].bNorth = false;
 	}
-	if(To.Z < From.Z)
+	if(ToPos.Z < FromPos.Z)
 	{
-		NodeData[PointIndex(To)].bUp = false;
-		UpWalls[PointIndex(To)].SetVisibility(false);
-		UpWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(From)].bDown = false;
-		DownWalls[PointIndex(From)].SetVisibility(false);
-		DownWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(ToPos)].bUp = false;
+		NodeData[PointIndex(FromPos)].bDown = false;
 	}
-	if(To.Z > From.Z)
+	if(ToPos.Z > FromPos.Z)
 	{
-		NodeData[PointIndex(To)].bDown = false;
-		DownWalls[PointIndex(To)].SetVisibility(false);
-		DownWalls[PointIndex(To)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		NodeData[PointIndex(From)].bUp = false;
-		UpWalls[PointIndex(From)].SetVisibility(false);
-		UpWalls[PointIndex(From)].SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		NodeData[PointIndex(ToPos)].bDown = false;
+		NodeData[PointIndex(FromPos)].bUp = false;
 	}
 }
 
@@ -404,32 +374,44 @@ void AMaze::MakeClean(FNoden Cube)
 {
 	if(Cube.bNorth == false && Cube.bSouth && Cube.bEast && Cube.bWest && Cube.bUp && Cube.bDown && abs(Cube.SouthPoint().Y) <= halfDepth)
 	{
-		ClearToFrom(Cube.NodePos, Cube.SouthPoint(), Cube.NodePos.Z);
+		ToPos = Cube.NodePos;
+		FromPos = Cube.SouthPoint();
+		ClearToFrom();
 	}
 
 	if(Cube.bNorth && Cube.bSouth == false && Cube.bEast && Cube.bWest && Cube.bUp && Cube.bDown && abs(Cube.NorthPoint().Y) <= halfDepth)
 	{
-		ClearToFrom(Cube.NodePos, Cube.NorthPoint(), Cube.NodePos.Z);
+		ToPos = Cube.NodePos;
+		FromPos = Cube.NorthPoint();
+		ClearToFrom();
 	}
 
 	if(Cube.bNorth && Cube.bSouth && Cube.bEast == false && Cube.bEast && Cube.bUp && Cube.bDown && abs(Cube.WestPoint().X) <= halfWidth)
 	{
-		ClearToFrom(Cube.NodePos, Cube.WestPoint(), Cube.NodePos.Z);
+		ToPos = Cube.NodePos;
+		FromPos = Cube.WestPoint();
+		ClearToFrom();
 	}
 
 	if(Cube.bNorth && Cube.bSouth && Cube.bEast && Cube.bWest == false && Cube.bUp && Cube.bDown && abs(Cube.EastPoint().X) <= halfWidth)
 	{
-		ClearToFrom(Cube.NodePos, Cube.EastPoint(), Cube.NodePos.Z);
+		ToPos = Cube.NodePos;
+		FromPos = Cube.EastPoint();
+		ClearToFrom();
 	}
 
 	if(Cube.bNorth && Cube.bSouth && Cube.bEast && Cube.bWest && Cube.bUp == false && Cube.bDown && abs(Cube.DownPoint().Z) <= halfHeight)
 	{
-		ClearToFrom(Cube.NodePos, Cube.DownPoint(), Cube.NodePos.Z);
+		ToPos = Cube.NodePos;
+		FromPos = Cube.DownPoint();
+		ClearToFrom();
 	}
 
 	if(Cube.bNorth && Cube.bSouth && Cube.bEast && Cube.bWest && Cube.bUp && Cube.bUp == false && abs(Cube.UpPoint().Z) <= halfHeight)
 	{
-		ClearToFrom(Cube.NodePos, Cube.UpPoint(), Cube.NodePos.Z);
+		ToPos = Cube.NodePos;
+		FromPos = Cube.UpPoint();
+		ClearToFrom();
 	}
 }
 
@@ -441,7 +423,7 @@ FName AMaze::GetNae(FIntVector conve)
 void AMaze::BuildRoom(FVector vec)
 {
 	Trils.SetLocation(FVector(vec.X * 100, vec.Y * 100, flatPart * ((vec.Z * 100) + 50) / thinPart));
-	UpWalls->AddInstance(Trils); 
+	UpWalls->AddInstance(Trils);
 	Trils.SetLocation(FVector(vec.X * 100, vec.Y * 100, flatPart * ((vec.Z * 100) - 50) / thinPart));
 	DownWalls->AddInstance(Trils);
 	Trils.SetLocation(FVector(vec.X * 100, flatPart * ((vec.Y * 100) + 50) / thinPart, vec.Z * 100));
@@ -488,9 +470,6 @@ void AMaze::Illuminate()
 
 				Lights.Add(Light);
 				GetWorld()->SpawnActor<APointLight>(Lights[Lights.Num() - 1], GetActorLocation() + RoomPos, SpawnBa, ActorSpawnParams);
-				//NodeData.Emplace();
-				//NodeData[NodeData.Num() - 1].NodePos = FIntVector(VecNum);
-				//BuildRoom(VecNum);
 			}
 		}
 	}
@@ -506,6 +485,56 @@ void AMaze::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimePro
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	
 	DOREPLIFETIME(AMaze, Seed);
+}
+
+void AMaze::BuildRooms()
+{
+	for (double i = -halfWidth; i <= halfWidth; i++)
+	{
+		for(double j = -halfDepth; j <= halfDepth; j++)
+		{
+			for (double k = -halfHeight; k <= halfHeight; k++)
+			{
+				VecNum = FVector(i, j, k);
+				MakeRoom();
+			}
+		}
+	}
+}
+
+void AMaze::MakeRoom()
+{
+	if(NodeData[PointIndex(FIntVector(VecNum))].bUp)
+	{
+		Trils.SetLocation(FVector(VecNum.X * 100, VecNum.Y * 100, flatPart * ((VecNum.Z * 100) + 50) / thinPart));
+		UpWalls->AddInstance(Trils);
+	}
+	if(NodeData[PointIndex(FIntVector(VecNum))].bDown)
+	{
+		Trils.SetLocation(FVector(VecNum.X * 100, VecNum.Y * 100, flatPart * ((VecNum.Z * 100) - 50) / thinPart));
+		DownWalls->AddInstance(Trils);
+	}
+	if(NodeData[PointIndex(FIntVector(VecNum))].bNorth)
+	{
+		Trils.SetLocation(FVector(VecNum.X * 100, flatPart * ((VecNum.Y * 100) + 50) / thinPart, VecNum.Z * 100));
+		NorthWalls->AddInstance(Trils);
+	}
+	if(NodeData[PointIndex(FIntVector(VecNum))].bSouth)
+	{
+		Trils.SetLocation(FVector(VecNum.X * 100, flatPart * ((VecNum.Y * 100) - 50) / thinPart, VecNum.Z * 100));
+		SouthWalls->AddInstance(Trils);
+	}
+	if(NodeData[PointIndex(FIntVector(VecNum))].bEast)
+	{
+		Trils.SetLocation(FVector(flatPart * ((VecNum.X * 100) + 50) / thinPart, VecNum.Y * 100, VecNum.Z * 100));
+		EastWalls->AddInstance(Trils);
+	}
+	if(NodeData[PointIndex(FIntVector(VecNum))].bWest)
+	{
+		Trils.SetLocation(FVector(flatPart * ((VecNum.X * 100) - 50) / thinPart, VecNum.Y * 100, VecNum.Z * 100));
+		WestWalls->AddInstance(Trils);
+	}
+	
 }
 
 

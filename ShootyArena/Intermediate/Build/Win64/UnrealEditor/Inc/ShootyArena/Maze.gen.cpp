@@ -262,6 +262,20 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FNoden>()
 		P_THIS->ExpandRooms();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AMaze::execMakeRoom)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->MakeRoom();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMaze::execBuildRooms)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->BuildRooms();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMaze::execBuildRoom)
 	{
 		P_GET_STRUCT(FVector,Z_Param_vec);
@@ -296,12 +310,9 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FNoden>()
 	}
 	DEFINE_FUNCTION(AMaze::execClearToFrom)
 	{
-		P_GET_STRUCT(FIntVector,Z_Param_To);
-		P_GET_STRUCT(FIntVector,Z_Param_From);
-		P_GET_PROPERTY(FIntProperty,Z_Param_TestX);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->ClearToFrom(Z_Param_To,Z_Param_From,Z_Param_TestX);
+		P_THIS->ClearToFrom();
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMaze::execPointIndex)
@@ -368,6 +379,7 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FNoden>()
 		static const FNameNativePtrPair Funcs[] = {
 			{ "BuildMaze", &AMaze::execBuildMaze },
 			{ "BuildRoom", &AMaze::execBuildRoom },
+			{ "BuildRooms", &AMaze::execBuildRooms },
 			{ "ClearToFrom", &AMaze::execClearToFrom },
 			{ "depth", &AMaze::execdepth },
 			{ "ExpandRooms", &AMaze::execExpandRooms },
@@ -376,6 +388,7 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FNoden>()
 			{ "Hunt", &AMaze::execHunt },
 			{ "Illuminate", &AMaze::execIlluminate },
 			{ "MakeClean", &AMaze::execMakeClean },
+			{ "MakeRoom", &AMaze::execMakeRoom },
 			{ "OnRep_Seed", &AMaze::execOnRep_Seed },
 			{ "PlaceNodes", &AMaze::execPlaceNodes },
 			{ "PointIndex", &AMaze::execPointIndex },
@@ -439,37 +452,41 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FNoden>()
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_AMaze_ClearToFrom_Statics
+	struct Z_Construct_UFunction_AMaze_BuildRooms_Statics
 	{
-		struct Maze_eventClearToFrom_Parms
-		{
-			FIntVector To;
-			FIntVector From;
-			int32 TestX;
-		};
-		static const UECodeGen_Private::FStructPropertyParams NewProp_To;
-		static const UECodeGen_Private::FStructPropertyParams NewProp_From;
-		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_TestX;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMaze_ClearToFrom_Statics::NewProp_To = { "To", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Maze_eventClearToFrom_Parms, To), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMaze_ClearToFrom_Statics::NewProp_From = { "From", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Maze_eventClearToFrom_Parms, From), Z_Construct_UScriptStruct_FIntVector, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_AMaze_ClearToFrom_Statics::NewProp_TestX = { "TestX", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Maze_eventClearToFrom_Parms, TestX), METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMaze_ClearToFrom_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMaze_ClearToFrom_Statics::NewProp_To,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMaze_ClearToFrom_Statics::NewProp_From,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMaze_ClearToFrom_Statics::NewProp_TestX,
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMaze_BuildRooms_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMaze_BuildRooms_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMaze, nullptr, "BuildRooms", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMaze_BuildRooms_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMaze_BuildRooms_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMaze_BuildRooms()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMaze_BuildRooms_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMaze_ClearToFrom_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMaze_ClearToFrom_Statics::Function_MetaDataParams[] = {
 		{ "ModuleRelativePath", "Maze.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMaze_ClearToFrom_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMaze, nullptr, "ClearToFrom", nullptr, nullptr, sizeof(Z_Construct_UFunction_AMaze_ClearToFrom_Statics::Maze_eventClearToFrom_Parms), Z_Construct_UFunction_AMaze_ClearToFrom_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMaze_ClearToFrom_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04820401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMaze_ClearToFrom_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMaze_ClearToFrom_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMaze_ClearToFrom_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMaze, nullptr, "ClearToFrom", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMaze_ClearToFrom_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMaze_ClearToFrom_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_AMaze_ClearToFrom()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -670,6 +687,28 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FNoden>()
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMaze_MakeClean_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMaze_MakeRoom_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMaze_MakeRoom_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Maze.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMaze_MakeRoom_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMaze, nullptr, "MakeRoom", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMaze_MakeRoom_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMaze_MakeRoom_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMaze_MakeRoom()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMaze_MakeRoom_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -988,7 +1027,8 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FNoden>()
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMaze_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AMaze_BuildMaze, "BuildMaze" }, // 3869533371
 		{ &Z_Construct_UFunction_AMaze_BuildRoom, "BuildRoom" }, // 1913452586
-		{ &Z_Construct_UFunction_AMaze_ClearToFrom, "ClearToFrom" }, // 1321435745
+		{ &Z_Construct_UFunction_AMaze_BuildRooms, "BuildRooms" }, // 1205607443
+		{ &Z_Construct_UFunction_AMaze_ClearToFrom, "ClearToFrom" }, // 2599541231
 		{ &Z_Construct_UFunction_AMaze_depth, "depth" }, // 3136817699
 		{ &Z_Construct_UFunction_AMaze_ExpandRooms, "ExpandRooms" }, // 3271648429
 		{ &Z_Construct_UFunction_AMaze_GetHunt, "GetHunt" }, // 1997513444
@@ -996,6 +1036,7 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FNoden>()
 		{ &Z_Construct_UFunction_AMaze_Hunt, "Hunt" }, // 1663269739
 		{ &Z_Construct_UFunction_AMaze_Illuminate, "Illuminate" }, // 3522638420
 		{ &Z_Construct_UFunction_AMaze_MakeClean, "MakeClean" }, // 626289606
+		{ &Z_Construct_UFunction_AMaze_MakeRoom, "MakeRoom" }, // 4082314211
 		{ &Z_Construct_UFunction_AMaze_OnRep_Seed, "OnRep_Seed" }, // 1113394530
 		{ &Z_Construct_UFunction_AMaze_PlaceNodes, "PlaceNodes" }, // 1728547883
 		{ &Z_Construct_UFunction_AMaze_PointIndex, "PointIndex" }, // 2111437330
@@ -1315,9 +1356,9 @@ template<> SHOOTYARENA_API UScriptStruct* StaticStruct<FNoden>()
 		{ FNoden::StaticStruct, Z_Construct_UScriptStruct_FNoden_Statics::NewStructOps, TEXT("Noden"), &Z_Registration_Info_UScriptStruct_Noden, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FNoden), 3481632578U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMaze, AMaze::StaticClass, TEXT("AMaze"), &Z_Registration_Info_UClass_AMaze, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMaze), 30903443U) },
+		{ Z_Construct_UClass_AMaze, AMaze::StaticClass, TEXT("AMaze"), &Z_Registration_Info_UClass_AMaze, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMaze), 572920500U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_742052328(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_1441314379(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_Maze_h_Statics::ScriptStructInfo),
 		nullptr, 0);

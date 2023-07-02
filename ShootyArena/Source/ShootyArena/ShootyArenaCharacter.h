@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ArenaPlayerState.h"
 #include "GameFramework/Character.h"
 #include "ShootyArenaCharacter.generated.h"
 
@@ -62,6 +63,11 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Interaction")
 	FOnUseItem OnUseItem;
 
+	UFUNCTION(BlueprintCallable)
+	int GetArenaPlayerStatePoints();
+
+	UFUNCTION(BlueprintCallable)
+	int GetMyPlayerIndex();
 	
 protected:
 	
