@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class AArenaPlayerState;
 #ifdef SHOOTYARENA_ShootyArenaCharacter_generated_h
 #error "ShootyArenaCharacter.generated.h already included, missing '#pragma once' in ShootyArenaCharacter.h"
 #endif
@@ -25,6 +26,8 @@ static inline void FOnUseItem_DelegateWrapper(const FMulticastScriptDelegate& On
 	virtual void Shoot_Implementation(); \
  \
 	DECLARE_FUNCTION(execShoot); \
+	DECLARE_FUNCTION(execAddPoints); \
+	DECLARE_FUNCTION(execGetArena); \
 	DECLARE_FUNCTION(execGetMyPlayerIndex); \
 	DECLARE_FUNCTION(execGetArenaPlayerStatePoints); \
 	DECLARE_FUNCTION(execGetMuzzle); \
@@ -35,6 +38,8 @@ static inline void FOnUseItem_DelegateWrapper(const FMulticastScriptDelegate& On
 	virtual void Shoot_Implementation(); \
  \
 	DECLARE_FUNCTION(execShoot); \
+	DECLARE_FUNCTION(execAddPoints); \
+	DECLARE_FUNCTION(execGetArena); \
 	DECLARE_FUNCTION(execGetMyPlayerIndex); \
 	DECLARE_FUNCTION(execGetArenaPlayerStatePoints); \
 	DECLARE_FUNCTION(execGetMuzzle); \

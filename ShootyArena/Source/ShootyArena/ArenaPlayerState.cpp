@@ -4,7 +4,7 @@
 #include "ArenaPlayerState.h"
 #include "Net/UnrealNetwork.h"
 
-void AArenaPlayerState::AddPoints(int32 Delta)
+void AArenaPlayerState::AddPoints_Implementation(int32 Delta)
 {
 	if (!ensure(Delta >= 0.0f))
 	{
@@ -52,5 +52,7 @@ void AArenaPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 
 	DOREPLIFETIME(AArenaPlayerState, Points);
 }
+
+
 
 

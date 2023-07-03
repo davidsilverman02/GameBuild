@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ShootyArenaCharacter.h"
 #include "GameFramework/Actor.h"
 #include "ShootyArenaProjectile.generated.h"
 
@@ -25,7 +26,8 @@ class AShootyArenaProjectile : public AActor
 public:
 	AShootyArenaProjectile();
 
-	AActor* Instigator;
+	//UPROPERTY()
+	//AActor* Instigator;
 
 	/** called when projectile hits something */
 	UFUNCTION()
@@ -35,5 +37,7 @@ public:
 	USphereComponent* GetCollisionComp() const { return CollisionComp; }
 	/** Returns ProjectileMovement subobject **/
 	UProjectileMovementComponent* GetProjectileMovement() const { return ProjectileMovement; }
+
+	//AArenaPlayerState Shooter;
 };
 

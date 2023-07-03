@@ -30,7 +30,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Points")
 	int32 GetPoints() const;
 
-	UFUNCTION(BlueprintCallable, Category = "Points")
+	UFUNCTION(Client, Reliable, BlueprintCallable, Category = "Points")
 	void AddPoints(int32 Delta);
 
 	UFUNCTION(BlueprintCallable, Category = "Points")

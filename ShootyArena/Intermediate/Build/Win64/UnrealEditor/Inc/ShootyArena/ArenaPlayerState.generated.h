@@ -33,6 +33,7 @@ static inline void FOnPointsChanged_DelegateWrapper(const FMulticastScriptDelega
 
 #define FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_SPARSE_DATA
 #define FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_RPC_WRAPPERS \
+	virtual void AddPoints_Implementation(int32 Delta); \
  \
 	DECLARE_FUNCTION(execRemovePoints); \
 	DECLARE_FUNCTION(execAddPoints); \
@@ -41,6 +42,7 @@ static inline void FOnPointsChanged_DelegateWrapper(const FMulticastScriptDelega
 
 
 #define FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void AddPoints_Implementation(int32 Delta); \
  \
 	DECLARE_FUNCTION(execRemovePoints); \
 	DECLARE_FUNCTION(execAddPoints); \
@@ -48,6 +50,14 @@ static inline void FOnPointsChanged_DelegateWrapper(const FMulticastScriptDelega
 	DECLARE_FUNCTION(execOnRep_Points);
 
 
+#define FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_EVENT_PARMS \
+	struct ArenaPlayerState_eventAddPoints_Parms \
+	{ \
+		int32 Delta; \
+	};
+
+
+#define FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_CALLBACK_WRAPPERS
 #define FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAArenaPlayerState(); \
@@ -106,12 +116,16 @@ public: \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AArenaPlayerState)
 
 
-#define FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_15_PROLOG
+#define FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_15_PROLOG \
+	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_EVENT_PARMS
+
+
 #define FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
 	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_SPARSE_DATA \
 	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_RPC_WRAPPERS \
+	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_CALLBACK_WRAPPERS \
 	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_INCLASS \
 	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_STANDARD_CONSTRUCTORS \
 public: \
@@ -123,6 +137,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
 	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_SPARSE_DATA \
 	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_CALLBACK_WRAPPERS \
 	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_INCLASS_NO_PURE_DECLS \
 	FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_18_ENHANCED_CONSTRUCTORS \
 private: \

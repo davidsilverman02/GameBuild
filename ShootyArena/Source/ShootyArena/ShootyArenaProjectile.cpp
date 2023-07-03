@@ -2,6 +2,8 @@
 
 #include "ShootyArenaProjectile.h"
 
+#include <string>
+
 #include "ArenaPlayerState.h"
 #include "ShootyArenaCharacter.h"
 #include "StatisticComponent.h"
@@ -42,26 +44,35 @@ void AShootyArenaProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherAc
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
-		if(OtherActor != Instigator)
+		if(OtherActor != GetInstigator())
 		{
 			OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
-
+			
 			Destroy();
 		}
 	}
 
-	if(OtherActor->FindComponentByClass<UStatisticComponent>() && OtherActor != Instigator)
+	if(OtherActor->FindComponentByClass<UStatisticComponent>() && OtherActor != GetInstigator())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Your Message"));
-		//Instigator->FindComponentByClass<UStatisticComponent>()->AddPoints(1);
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Your Message"));
+		//GetInstigator()->FindComponentByClass<UStatisticComponent>()->AddPoints(1);
 
-		if(APawn* Pon = Cast<APawn>(OtherActor))
+		// if(APawn* Pon = Cast<APawn>(GetInstigator()))
+		// {
+		// 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Not Your Message"));
+		// }
+
+		if(AShootyArenaCharacter* Shot = Cast<AShootyArenaCharacter>(GetInstigator()))
 		{
-			if(AArenaPlayerState* Arin = Pon->GetPlayerState<AArenaPlayerState>())
+			if(Shot->GetArena() != nullptr)
 			{
-				Arin->AddPoints(1);
+				//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Not Your Message"));
+				Shot->AddPoints(1);
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Not Your Message"));
+				//Shot->GetArena()->AddPoints(1);
 			}
 		}
+		
 		
 		Destroy();
 	}

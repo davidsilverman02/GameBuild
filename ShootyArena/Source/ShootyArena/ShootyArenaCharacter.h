@@ -68,7 +68,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int GetMyPlayerIndex();
-	
+
+	UFUNCTION(BlueprintCallable)
+	AArenaPlayerState* GetArena();
+
+	UFUNCTION(BlueprintCallable)
+	void AddPoints(int po);
 protected:
 	
 	/** Fires a projectile. */

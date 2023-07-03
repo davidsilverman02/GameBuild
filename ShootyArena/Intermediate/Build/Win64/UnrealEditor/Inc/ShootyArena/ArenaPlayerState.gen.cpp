@@ -68,7 +68,7 @@ void EmptyLinkFunctionForGeneratedCodeArenaPlayerState() {}
 		P_GET_PROPERTY(FIntProperty,Z_Param_Delta);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->AddPoints(Z_Param_Delta);
+		P_THIS->AddPoints_Implementation(Z_Param_Delta);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AArenaPlayerState::execGetPoints)
@@ -86,6 +86,13 @@ void EmptyLinkFunctionForGeneratedCodeArenaPlayerState() {}
 		P_THIS->OnRep_Points(Z_Param_OldPoints);
 		P_NATIVE_END;
 	}
+	static FName NAME_AArenaPlayerState_AddPoints = FName(TEXT("AddPoints"));
+	void AArenaPlayerState::AddPoints(int32 Delta)
+	{
+		ArenaPlayerState_eventAddPoints_Parms Parms;
+		Parms.Delta=Delta;
+		ProcessEvent(FindFunctionChecked(NAME_AArenaPlayerState_AddPoints),&Parms);
+	}
 	void AArenaPlayerState::StaticRegisterNativesAArenaPlayerState()
 	{
 		UClass* Class = AArenaPlayerState::StaticClass();
@@ -99,10 +106,6 @@ void EmptyLinkFunctionForGeneratedCodeArenaPlayerState() {}
 	}
 	struct Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics
 	{
-		struct ArenaPlayerState_eventAddPoints_Parms
-		{
-			int32 Delta;
-		};
 		static const UECodeGen_Private::FIntPropertyParams NewProp_Delta;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
@@ -120,7 +123,7 @@ void EmptyLinkFunctionForGeneratedCodeArenaPlayerState() {}
 		{ "ModuleRelativePath", "ArenaPlayerState.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AArenaPlayerState, nullptr, "AddPoints", nullptr, nullptr, sizeof(Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::ArenaPlayerState_eventAddPoints_Parms), Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AArenaPlayerState, nullptr, "AddPoints", nullptr, nullptr, sizeof(ArenaPlayerState_eventAddPoints_Parms), Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x05020CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AArenaPlayerState_AddPoints_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_AArenaPlayerState_AddPoints()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -266,7 +269,7 @@ void EmptyLinkFunctionForGeneratedCodeArenaPlayerState() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_ShootyArena,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AArenaPlayerState_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_AArenaPlayerState_AddPoints, "AddPoints" }, // 1544514952
+		{ &Z_Construct_UFunction_AArenaPlayerState_AddPoints, "AddPoints" }, // 2523147308
 		{ &Z_Construct_UFunction_AArenaPlayerState_GetPoints, "GetPoints" }, // 3451113910
 		{ &Z_Construct_UFunction_AArenaPlayerState_OnRep_Points, "OnRep_Points" }, // 2346453735
 		{ &Z_Construct_UFunction_AArenaPlayerState_RemovePoints, "RemovePoints" }, // 3542170229
@@ -344,9 +347,9 @@ void EmptyLinkFunctionForGeneratedCodeArenaPlayerState() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AArenaPlayerState, AArenaPlayerState::StaticClass, TEXT("AArenaPlayerState"), &Z_Registration_Info_UClass_AArenaPlayerState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AArenaPlayerState), 3094493005U) },
+		{ Z_Construct_UClass_AArenaPlayerState, AArenaPlayerState::StaticClass, TEXT("AArenaPlayerState"), &Z_Registration_Info_UClass_AArenaPlayerState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AArenaPlayerState), 1863076169U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_889847660(TEXT("/Script/ShootyArena"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_893351690(TEXT("/Script/ShootyArena"),
 		Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_ShootyArena_Source_ShootyArena_ArenaPlayerState_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

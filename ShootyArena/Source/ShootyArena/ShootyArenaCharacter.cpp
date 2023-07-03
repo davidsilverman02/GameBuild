@@ -199,7 +199,9 @@ void AShootyArenaCharacter::Shoot_Implementation()
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
 	
 			// Spawn the projectile at the muzzle
-			World->SpawnActor<AShootyArenaProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+			AShootyArenaProjectile* Shot = World->SpawnActor<AShootyArenaProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+			Shot->SetInstigator(this);
+			//Shot->Shooter = GetArena();
 		}
 	}
 }
@@ -220,6 +222,24 @@ int AShootyArenaCharacter::GetMyPlayerIndex()
 {
 	return GetPlayerState()->GetPlayerId();
 }
+
+AArenaPlayerState* AShootyArenaCharacter::GetArena()
+{
+	if(AArenaPlayerState* Arn = Cast<AArenaPlayerState>(GetPlayerState()))
+	{
+		return Arn;
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
+void AShootyArenaCharacter::AddPoints(int po)
+{
+	GetArena()->AddPoints(po);
+}
+
 
 
 
